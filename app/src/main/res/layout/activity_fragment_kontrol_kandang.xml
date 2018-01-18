@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.isepmm.kandangku.FragmentKontrolKandang">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/suhu_sekarang"
+                    android:textColor="@color/hitam"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="25"
+                    android:textColor="@color/putih"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimary"
+                android:padding="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/masukkan_suhu"
+                android:textColor="@color/hitam"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/suhu_tinggi"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:hint="0"
+                android:textSize="22sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="16dp" />
+
+            <EditText
+                android:id="@+id/suhu_rendah"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:hint="0"
+                android:textSize="22sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="16dp" />
+
+            <Button
+                android:id="@+id/set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/ubah"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</ScrollView>

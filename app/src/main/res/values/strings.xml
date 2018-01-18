@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">KandangKu</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="pencatatn_suhu">Pencatatn Suhu</string>
+    <string name="kontrol_kandang">Kontrol Kandang</string>
+    <string name="perkiraan_untung">Perkiraan Untung</string>
+    <string name="exit">Apakah Anda Ingin Keluar Dari Aplikasi?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="ubah">ubah</string>
+    <string name="suhu_sekarang">Suhu Sekarang</string>
+    <string name="masukkan_suhu">Masukkan Suhu :</string>
 </resources>

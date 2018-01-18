@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_pencatatan_suhu"
+        android:icon="@drawable/pencatatan_suhu"
+        android:title="@string/pencatatn_suhu" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_kontrol_kandang"
+        android:icon="@drawable/kontrol_kandang"
+        android:title="@string/kontrol_kandang" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_perkiraan_untung"
+        android:icon="@drawable/perkiraan_untung"
+        android:title="@string/perkiraan_untung" />
 
 </menu>
