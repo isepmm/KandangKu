@@ -6,7 +6,7 @@
     <string name="exit">Apakah Anda Ingin Keluar Dari Aplikasi?</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
-    <string name="ubah">ubah</string>
+    <string name="ubah">Ubah</string>
     <string name="suhu_sekarang">Suhu Sekarang</string>
-    <string name="masukkan_suhu">Masukkan Suhu :</string>
+    <string name="masukkan_suhu">Masukkan Suhu</string>
 </resources>

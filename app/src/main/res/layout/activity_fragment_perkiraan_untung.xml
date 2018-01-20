@@ -4,36 +4,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/abu2"
+    android:orientation="vertical"
     tools:context="com.example.isepmm.kandangku.FragmentKontrolKandang">
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/abu2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Masukkan Jumlah Ayam"
+                        android:textColor="@color/hitam"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/abu2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:text="Jumlah Awal"
+                        android:textColor="@color/hitam"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/jumlah_awal"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/abu2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:text="Ayam Mati"
+                        android:textColor="@color/hitam"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ayam_mati"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="39dp"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/ubah"
+                    android:onClick="jumlah"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Perkiraan Untung"
-                    android:textColor="@color/hitam"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/merahmuda"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:text="Jumlah"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/abu2"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:background="@color/merahmuda"
+                        android:layout_margin="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Jumlah Ayam Sekarang"
+                        android:textColor="@color/hitam"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/jumlah_ayam_sekarang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/merahmuda"
+                        android:text="1000"
+                        android:textColor="@color/hitam"
+                        android:textSize="90sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 </ScrollView>
