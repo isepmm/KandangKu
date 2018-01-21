@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "499041314349",
+    "firebase_url": "https://kandangku-6a21c.firebaseio.com",
+    "project_id": "kandangku-6a21c",
+    "storage_bucket": "kandangku-6a21c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499041314349:android:9d6960310981c45f",
+        "android_client_info": {
+          "package_name": "com.example.isepmm.kandangku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499041314349-06g2tprf44ulmbq6ps2n1ph3pfs83lb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.isepmm.kandangku",
+            "certificate_hash": "efb6b13779b7349c5cc0ac320f3bd0c3a1de43a6"
+          }
+        },
+        {
+          "client_id": "499041314349-rb56n2u99hnn0as1bflejp9a4b3a2q04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwfMmklkwXxDyJaZRMLom-8oebSCCelCg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499041314349-rb56n2u99hnn0as1bflejp9a4b3a2q04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

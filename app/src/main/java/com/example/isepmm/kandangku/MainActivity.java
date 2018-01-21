@@ -6,9 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+
+
     };
+
 
     public void changeFragment(android.support.v4.app.Fragment fragment) {
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
