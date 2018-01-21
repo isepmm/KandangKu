@@ -9,4 +9,6 @@
     <string name="ubah">Ubah</string>
     <string name="suhu_sekarang">Suhu Sekarang</string>
     <string name="masukkan_suhu">Masukkan Suhu</string>
+    <string name="empty_message">Data Tidak Boleh Kosong!</string>
+    <string name="set">Data Berhasil Diubah</string>
 </resources>

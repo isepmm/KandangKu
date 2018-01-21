@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1A237E</color>
-    <color name="colorPrimaryDark">#1A237E</color>
-    <color name="colorAccent">#1A237E</color>
+    <color name="colorPrimary">#21759B</color>
+    <color name="colorPrimaryDark">#21759B</color>
+    <color name="colorAccent">#21759B</color>
     <color name="hitam">#000000</color>
     <color name="putih">#ffffff</color>
-    <color name="merahtua">#EF9A9A</color>
-    <color name="merahmuda">#EF5350</color>
-    <color name="biru">#1A237E</color>
-    <color name="abu">#E0E0E0</color>
-    <color name="abu2">#BDBDBD</color>
+    <color name="merahtua">#F3B2B1</color>
+    <color name="merahmuda">#FE7A7A</color>
+    <color name="biru">#21759B</color>
+    <color name="abu">#F2F2F2</color>
+    <color name="abu2">#E6E6E6</color>
+    <color name="abu3">#BBBDBF</color>
 </resources>
