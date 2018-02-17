@@ -66,7 +66,7 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
-                        android:background="@color/merahmuda"
+                        android:backgroundTint="@color/merahmuda"
                         android:gravity="center"
                         android:hint="Ekor"
                         android:inputType="number"
@@ -97,7 +97,7 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="39dp"
-                        android:background="@color/merahmuda"
+                        android:backgroundTint="@color/merahmuda"
                         android:gravity="center"
                         android:hint="Ekor"
                         android:inputType="number"
@@ -150,7 +150,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/jumlah_ayam_sekarang"
+                        android:id="@+id/jumlahayam"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
@@ -159,6 +159,7 @@
                         android:textColor="@color/hitam"
                         android:textSize="50sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
