@@ -46,16 +46,6 @@
                             android:tint="@color/merahmuda"
                             android:translationZ="1dp" />
 
-                        <ImageView
-                            android:layout_width="@dimen/small_circle_radius"
-                            android:layout_height="@dimen/small_circle_radius"
-                            android:layout_alignBottom="@+id/solid_circle"
-                            android:layout_alignEnd="@+id/solid_circle"
-                            android:layout_alignRight="@+id/solid_circle"
-                            android:src="@drawable/circle"
-                            android:tint="@color/merahtua"
-                            android:translationZ="2dp" />
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -84,16 +74,23 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="30"
-                                    android:textColor="#fff"
+                                    android:textColor="@color/putih"
                                     android:textSize="90sp"
                                     android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:translationZ="1dp"
+                                    android:tint="@color/putih"
+                                    android:src="@drawable/derajat"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:paddingLeft="16dp"
                                     android:text="c"
-                                    android:textColor="#fff"
+                                    android:textColor="@color/putih"
                                     android:textSize="90sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -136,7 +133,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@color/abu2"
@@ -156,7 +153,7 @@
                         android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
-                        android:background="@color/merahmuda"
+                        android:backgroundTint="@color/merahmuda"
                         android:gravity="center"
                         android:hint="0"
                         android:inputType="number"
@@ -186,9 +183,9 @@
                         android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:background="@color/merahmuda"
                         android:gravity="center"
                         android:hint="0"
+                        android:backgroundTint="@color/merahmuda"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textSize="22sp" />
