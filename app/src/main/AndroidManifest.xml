@@ -18,9 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FragmentKontrolKandang" />
-        <activity android:name=".FragmentPencatatanSuhu" />
-        <activity android:name=".FragmentPerkiraanUntung" />
     </application>
 
 </manifest>
