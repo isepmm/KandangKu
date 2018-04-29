@@ -34,14 +34,6 @@
                     android:background="@color/abu2"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Masukkan Jumlah Ayam"
-                        android:textColor="@color/hitam"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -52,27 +44,6 @@
                     android:background="@color/abu2"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:text="Jumlah Awal"
-                        android:textColor="@color/hitam"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/jumlah_awal"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="16dp"
-                        android:backgroundTint="@color/merahmuda"
-                        android:gravity="center"
-                        android:hint="Ekor"
-                        android:inputType="number"
-                        android:maxLines="1"
-                        android:textSize="16sp"
-                        android:textStyle="italic" />
 
                 </LinearLayout>
 
@@ -83,44 +54,10 @@
                     android:background="@color/abu2"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:text="Ayam Mati"
-                        android:textColor="@color/hitam"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/ayam_mati"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="39dp"
-                        android:backgroundTint="@color/merahmuda"
-                        android:gravity="center"
-                        android:hint="Ekor"
-                        android:inputType="number"
-                        android:maxLines="1"
-                        android:textSize="16sp"
-                        android:textStyle="italic" />
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_jumlah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="28dp"
-                    android:background="@color/merahmuda"
-                    android:onClick="jumlah"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="16dp"
-                    android:text="Jumlah"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-            </LinearLayout>
+               </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,27 +75,6 @@
                         android:layout_height="4dp"
                         android:layout_margin="16dp"
                         android:background="@color/merahmuda" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:text="Jumlah Ayam Sekarang"
-                        android:textColor="@color/hitam"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/jumlahayam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:text="0"
-                        android:textColor="@color/hitam"
-                        android:textSize="50sp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
