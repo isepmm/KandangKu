@@ -11,4 +11,8 @@
     <string name="masukkan_suhu">Masukkan Suhu</string>
     <string name="empty_message">Data Tidak Boleh Kosong!</string>
     <string name="set">Data Berhasil Diubah</string>
+    <string name="mulai">Mulai Berternak</string>
+    <string name="edit">Ubah</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_history">History</string>
 </resources>
