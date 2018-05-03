@@ -90,11 +90,12 @@ public class FragmentKontrolKandang extends android.support.v4.app.Fragment {
     }
 
     public void writeNewPost(EditText SuhuTertinggi, EditText SuhuTerendah) {
-        if (!validationInputField()) {
+        if (!validationInputField(Float.valueOf(SuhuTertinggi.getText().
+                toString()),Float.valueOf(SuhuTerendah.getText().toString()))) {
             return;
         } else {
-            Integer suhuTinggi  = Integer.valueOf(SuhuTertinggi.getText().toString());
-            Integer suhuRendah = Integer.valueOf(SuhuTerendah.getText().toString());
+            float suhuTinggi  = Float.valueOf(SuhuTertinggi.getText().toString());
+            float suhuRendah = Float.valueOf(SuhuTerendah.getText().toString());
             datatertinggi.setValue(suhuTinggi);
             dataterendah.setValue(suhuRendah);
 
@@ -102,13 +103,16 @@ public class FragmentKontrolKandang extends android.support.v4.app.Fragment {
         }
     }
 
-    private boolean validationInputField() {
+    private boolean validationInputField(float tinggi, float rendah) {
         boolean isValid = true;
         if (suhutertinggi.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.empty_message, Toast.LENGTH_LONG).show();
             isValid = false;
         } else if (suhuterendah.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.empty_message, Toast.LENGTH_LONG).show();
+            isValid = false;
+        }else  if(tinggi < rendah ){
+            Toast.makeText(getContext(), R.string.kurang, Toast.LENGTH_LONG).show();
             isValid = false;
         }
         return isValid;

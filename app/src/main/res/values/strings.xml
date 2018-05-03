@@ -15,4 +15,5 @@
     <string name="edit">Ubah</string>
     <string name="action_delete">Hapus</string>
     <string name="action_history">History</string>
+    <string name="kurang">Suhu Tertinggi Tidak Boleh Kurang Dari Suhu Terendah</string>
 </resources>
