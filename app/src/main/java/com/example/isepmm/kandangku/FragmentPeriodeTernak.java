@@ -1,57 +1,24 @@
 package com.example.isepmm.kandangku;
 
 import android.content.Intent;
-import android.graphics.DashPathEffect;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class FragmentPencatatanSuhu extends android.support.v4.app.Fragment{
-//    private LineChart mChart;
-//    private LineDataSet mSetSuhu;
-//    private ArrayList<Entry> mValuesSuhu;
-//    View view;
-//
-//    public FragmentPencatatanSuhu (){
-//
-//    }
-
+public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("Periode");
 
     private ListView listTanggal;
@@ -60,7 +27,7 @@ public class FragmentPencatatanSuhu extends android.support.v4.app.Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_pencatatan_suhu, container, false);
+        View view = inflater.inflate(R.layout.activity_fragment_periode_ternak, container, false);
 
         listTanggal = (ListView) view.findViewById(R.id.recyclerview);
         mAdapter = new KandangAdapter(getContext(),getDataKandang());
@@ -77,7 +44,7 @@ public class FragmentPencatatanSuhu extends android.support.v4.app.Fragment{
             listTanggal.setAdapter(mAdapter);
             ListOnClick(listTanggal);
         }else{
-            Log.d("Uji","Goblok");
+            Log.d("Uji","baca");
         }
 
         //listTanggal.setEmptyView();
@@ -133,5 +100,4 @@ public class FragmentPencatatanSuhu extends android.support.v4.app.Fragment{
 
         return curKandang;
     }
-
 }

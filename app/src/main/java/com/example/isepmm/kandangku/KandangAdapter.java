@@ -22,7 +22,7 @@ import java.util.List;
 public class KandangAdapter extends ArrayAdapter<Kandang> {
 
     private TextView tanggal_datang;
-    private String bulan[] = {"Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ags","Sep","Okt","Nov","Des"};
+    private String bulan[] = {"Januari","Februari","Maret","April","Mei","Juni","Juli","Aguatua","September","Oktober","November","Desember"};
     public KandangAdapter(Context context, List objects) {
         super(context, 0, objects);
     }

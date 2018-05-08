@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">KandangKu</string>
-    <string name="pencatatn_suhu">Pencatatan Suhu</string>
-    <string name="kontrol_kandang">Kontrol Kandang</string>
-    <string name="perkiraan_untung">Perkiraan Untung</string>
+    <string name="periode_ternak">Periode Ternak</string>
+    <string name="remote">Remote</string>
+    <string name="grafik">Grafik</string>
     <string name="exit">Apakah Anda Ingin Keluar Dari Aplikasi?</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>

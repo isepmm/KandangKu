@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class FragmentKontrolKandang extends android.support.v4.app.Fragment {
+public class FragmentRemote extends android.support.v4.app.Fragment {
     DatabaseReference datasekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
     DatabaseReference datatertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
     DatabaseReference dataterendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
@@ -28,7 +28,7 @@ public class FragmentKontrolKandang extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_kontrol_kandang, container, false);
+        View view = inflater.inflate(R.layout.activity_fragment_remote, container, false);
 
         suhusekarang = (TextView) view.findViewById(R.id.suhusekarang);
         suhutertinggi = (EditText) view.findViewById(R.id.suhutertinggi);
