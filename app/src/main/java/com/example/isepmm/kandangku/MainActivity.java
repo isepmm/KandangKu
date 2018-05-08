@@ -1,55 +1,35 @@
 package com.example.isepmm.kandangku;
 
 import android.content.DialogInterface;
-import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        FragmentPencatatanSuhu fragmentPencatatanSuhu = new FragmentPencatatanSuhu();
-        FragmentKontrolKandang fragmentKontrolKandang = new FragmentKontrolKandang();
-        FragmentPerkiraanUntung fragmentPerkiraanUntung = new FragmentPerkiraanUntung();
+        FragmentPeriodeTernak fragmentDataTernak = new FragmentPeriodeTernak();
+        FragmentRemote fragmentRemote = new FragmentRemote();
+        FragmentGrafik fragmentGrafik = new FragmentGrafik();
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_pencatatan_suhu:
-                    setTitle(R.string.pencatatn_suhu);
-                    changeFragment(new FragmentPencatatanSuhu());
+                case R.id.navigation_periodeternak:
+                    setTitle(R.string.periode_ternak);
+                    changeFragment(new FragmentPeriodeTernak());
                     break;
-                case R.id.navigation_kontrol_kandang:
-                    setTitle(R.string.kontrol_kandang);
-                    changeFragment(new FragmentKontrolKandang());
+                case R.id.navigation_remote:
+                    setTitle(R.string.remote);
+                    changeFragment(new FragmentRemote());
                     break;
-                case R.id.navigation_perkiraan_untung:
-                    setTitle(R.string.perkiraan_untung);
-                    changeFragment(new FragmentPerkiraanUntung());
+                case R.id.navigation_grafik:
+                    setTitle(R.string.grafik);
+                    changeFragment(new FragmentGrafik());
                     break;
             }
             return true;
@@ -71,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        changeFragment(new FragmentPencatatanSuhu());
-        setTitle(R.string.pencatatn_suhu);
-
+        changeFragment(new FragmentPeriodeTernak());
+        setTitle(R.string.periode_ternak);
     }
 
     @Override

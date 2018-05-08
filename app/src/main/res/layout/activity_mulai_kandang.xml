@@ -29,7 +29,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/tgl"
+                    android:id="@+id/tanggal_datang_doc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tanggal Datang DOC"

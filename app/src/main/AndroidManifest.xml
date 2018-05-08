@@ -21,7 +21,9 @@
         <activity android:name=".MulaiKandang" />
         <activity android:name=".ViewKandang" />
         <activity android:name=".History" />
-        <activity android:name=".Ayam"></activity>
+        <activity android:name=".Ayam" />
+        <activity android:name=".EditKandang">
+        </activity>
     </application>
 
 </manifest>

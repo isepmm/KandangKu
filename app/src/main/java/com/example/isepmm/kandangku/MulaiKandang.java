@@ -41,7 +41,7 @@ public class MulaiKandang extends AppCompatActivity {
         this.setTitle("Mulai Berternak");
         setContentView(R.layout.activity_mulai_kandang);
 
-        tanggalmulai = (EditText) findViewById(R.id.tgl);
+        tanggalmulai = (EditText) findViewById(R.id.tanggal_datang_doc);
         jumlahayam = (EditText) findViewById(R.id.jumlah_ayam);
         hargadoc = (EditText) findViewById(R.id.harga_doc);
         mulai = (Button) findViewById(R.id.mulai);

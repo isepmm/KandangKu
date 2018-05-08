@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context="com.example.isepmm.kandangku.FragmentKontrolKandang">
+    tools:context="com.example.isepmm.kandangku.FragmentRemote">
 
     <ListView
         android:id="@+id/recyclerview"
@@ -21,7 +21,7 @@
         android:drawablePadding="8dp"
         android:textStyle="bold"
         android:textColor="#494949"
-        android:text="Masukkan Data"
+        android:text="Mari Kita Berternak"
         android:textSize="16sp"
         android:layout_centerInParent="true"
         android:visibility="gone"

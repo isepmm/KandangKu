@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_pencatatan_suhu"
-        android:icon="@drawable/pencatatan_suhu"
-        android:title="@string/pencatatn_suhu" />
+        android:id="@+id/navigation_periodeternak"
+        android:icon="@drawable/periodeternak"
+        android:title="@string/periode_ternak" />
 
     <item
-        android:id="@+id/navigation_kontrol_kandang"
-        android:icon="@drawable/kontrol_kandang"
-        android:title="@string/kontrol_kandang" />
+        android:id="@+id/navigation_remote"
+        android:icon="@drawable/remote"
+        android:title="@string/remote" />
 
     <item
-        android:id="@+id/navigation_perkiraan_untung"
-        android:icon="@drawable/perkiraan_untung"
-        android:title="@string/perkiraan_untung" />
+        android:id="@+id/navigation_grafik"
+        android:icon="@drawable/grafik"
+        android:title="@string/grafik" />
 
 </menu>
