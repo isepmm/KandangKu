@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MulaiKandang" />
-        <activity android:name=".ViewKandang" />
+        <activity android:name=".ViewKandang" android:parentActivityName=".MainActivity"/>
         <activity android:name=".History" />
         <activity android:name=".Ayam" />
         <activity android:name=".EditKandang">

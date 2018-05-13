@@ -16,4 +16,7 @@
     <string name="action_delete">Hapus</string>
     <string name="action_history">History</string>
     <string name="kurang">Suhu Tertinggi Tidak Boleh Kurang Dari Suhu Terendah</string>
+    <string name="delete_dialog_msg">Delete selected pet?</string>
+    <string name="action_cancel">Batal</string>
+
 </resources>

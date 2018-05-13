@@ -1,7 +1,6 @@
 package com.example.isepmm.kandangku;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,31 +16,44 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FragmentRemote extends android.support.v4.app.Fragment {
-    DatabaseReference datasekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
-    DatabaseReference datatertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
-    DatabaseReference dataterendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
+    DatabaseReference dataSekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
+    DatabaseReference dataKelembaban = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("KelembabanSekarang");
+    DatabaseReference dataTertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
+    DatabaseReference dataTerendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
+    DatabaseReference dataOnCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOn");
+    DatabaseReference dataOffCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOff");
 
-    TextView suhusekarang;
-    EditText suhutertinggi;
-    EditText suhuterendah;
+    TextView suhuSekarang;
+    TextView kelembabanSekarang;
+    TextView suhuTertinggiView;
+    TextView suhuTerendahView;
+    EditText suhuTertinggi;
+    EditText suhuTerendah;
+    EditText onCooling;
+    EditText offCooling;
     Button ubah;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment_remote, container, false);
 
-        suhusekarang = (TextView) view.findViewById(R.id.suhusekarang);
-        suhutertinggi = (EditText) view.findViewById(R.id.suhutertinggi);
-        suhuterendah = (EditText) view.findViewById(R.id.suhuterendah);
+
+        suhuSekarang = (TextView) view.findViewById(R.id.suhuSekarang);
+        kelembabanSekarang = (TextView) view.findViewById(R.id.kelembaban);
+        suhuTertinggiView = (TextView) view.findViewById(R.id.tinggi);
+        suhuTerendahView = (TextView) view.findViewById(R.id.rendah);
+        suhuTertinggi = (EditText) view.findViewById(R.id.suhutertinggi);
+        suhuTerendah = (EditText) view.findViewById(R.id.suhuterendah);
+        onCooling = (EditText) view.findViewById(R.id.onCoolling);
+        offCooling = (EditText) view.findViewById(R.id.offCooling);
         ubah = (Button) view.findViewById(R.id.ubah);
 
-        datasekarang.addValueEventListener(new ValueEventListener() {
+        dataSekarang.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float suhuSekarang = dataSnapshot.getValue(float.class);
-                    Log.d("suhusekarang", "" + String.valueOf(suhuSekarang));
-                    suhusekarang.setText(String.valueOf(suhuSekarang));
+                    int suhuSekarang = dataSnapshot.getValue(Integer.class);
+                    FragmentRemote.this.suhuSekarang.setText(String.valueOf(suhuSekarang));
                 }
             }
 
@@ -50,12 +62,12 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
             }
         });
 
-        datatertinggi.addValueEventListener(new ValueEventListener() {
+        dataKelembaban.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float tinggi = dataSnapshot.getValue(float.class);
-                    suhutertinggi.setText(String.valueOf(tinggi));
+                    int tinggi = dataSnapshot.getValue(Integer.class);
+                    kelembabanSekarang.setText(String.valueOf(tinggi));
                 }
             }
 
@@ -64,12 +76,30 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
-        dataterendah.addValueEventListener(new ValueEventListener() {
+
+        dataTertinggi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float rendah = dataSnapshot.getValue(float.class);
-                    suhuterendah.setText(String.valueOf(rendah));
+                    int tinggi = dataSnapshot.getValue(Integer.class);
+                    suhuTertinggi.setText(String.valueOf(tinggi));
+                    suhuTertinggiView.setText(String.valueOf(tinggi));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        dataTerendah.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(float.class) != null) {
+                    int rendah = dataSnapshot.getValue(Integer.class);
+                    suhuTerendah.setText(String.valueOf(rendah));
+                    suhuTerendah.setText(String.valueOf(rendah));
+                    suhuTerendahView.setText(String.valueOf(rendah));
                 }
             }
 
@@ -82,34 +112,45 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         ubah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeNewPost(suhutertinggi , suhuterendah);
+                writeNewPost(suhuTertinggi, suhuTerendah, onCooling, offCooling);
             }
         });
 
         return view;
     }
 
-    public void writeNewPost(EditText SuhuTertinggi, EditText SuhuTerendah) {
-        if (!validationInputField(Float.valueOf(SuhuTertinggi.getText().
-                toString()),Float.valueOf(SuhuTerendah.getText().toString()))) {
+    public void writeNewPost(EditText SuhuTertinggi, EditText SuhuTerendah, EditText OnCooling, EditText OffCooling ) {
+        if (!validationInputField(Integer.valueOf(SuhuTertinggi.getText().
+                toString()),Integer.valueOf(SuhuTerendah.getText().toString()))) {
             return;
         } else {
-            float suhuTinggi  = Float.valueOf(SuhuTertinggi.getText().toString());
-            float suhuRendah = Float.valueOf(SuhuTerendah.getText().toString());
-            datatertinggi.setValue(suhuTinggi);
-            dataterendah.setValue(suhuRendah);
+            int suhuTinggi  = Integer.valueOf(SuhuTertinggi.getText().toString());
+            int suhuRendah = Integer.valueOf(SuhuTerendah.getText().toString());
+            int onCooling = Integer.valueOf(OnCooling.getText().toString());
+            int offCooling = Integer.valueOf(OffCooling.getText().toString());
+            dataTertinggi.setValue(suhuTinggi);
+            dataTerendah.setValue(suhuRendah);
+            dataOnCooling.setValue(onCooling);
+            dataOffCooling.setValue(offCooling);
+
 
             Toast.makeText(getContext(), R.string.set, Toast.LENGTH_LONG).show();
         }
     }
 
-    private boolean validationInputField(float tinggi, float rendah) {
+    private boolean validationInputField(int tinggi, int rendah) {
         boolean isValid = true;
-        if (suhutertinggi.getText().toString().equals("")) {
+        if (suhuTertinggi.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.empty_message, Toast.LENGTH_LONG).show();
             isValid = false;
-        } else if (suhuterendah.getText().toString().equals("")) {
+        }else if (onCooling.getText().toString().equals("")) {
+            Toast.makeText(getContext(), "Data On Cooling kosong", Toast.LENGTH_LONG).show();
+            isValid = false;
+        }else if (suhuTerendah.getText().toString().equals("")) {
             Toast.makeText(getContext(), R.string.empty_message, Toast.LENGTH_LONG).show();
+            isValid = false;
+        }else if (offCooling.getText().toString().equals("")) {
+            Toast.makeText(getContext(),"Data Off Cooling kosong", Toast.LENGTH_LONG).show();
             isValid = false;
         }else  if(tinggi < rendah ){
             Toast.makeText(getContext(), R.string.kurang, Toast.LENGTH_LONG).show();

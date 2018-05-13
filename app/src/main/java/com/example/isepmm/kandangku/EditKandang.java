@@ -151,9 +151,9 @@ public class EditKandang extends AppCompatActivity {
                         Long.parseLong(boarding.getText().toString()),
                         Long.parseLong(harga_pasar.getText().toString()),
                         Long.parseLong(konsumsi_minum.getText().toString()),
+                        Long.parseLong(konsumsi_obat.getText().toString()),
                         Long.parseLong(konsumsi_pakan.getText().toString()),
                         Long.parseLong(konsumsi_vitamin.getText().toString()),
-                        Long.parseLong(konsumsi_obat.getText().toString()),
                         Long.parseLong(penggunaan_listrik.getText().toString())
                         );
                 Map<String, Object> tes = kandang.toMap();

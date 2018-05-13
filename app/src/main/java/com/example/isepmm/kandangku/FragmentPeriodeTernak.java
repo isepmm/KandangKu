@@ -24,9 +24,10 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
     private ListView listTanggal;
     private KandangAdapter mAdapter;
     private ArrayList<String> myKey = new ArrayList<>();
+    private Long tgl;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment_periode_ternak, container, false);
 
         listTanggal = (ListView) view.findViewById(R.id.recyclerview);
@@ -58,6 +59,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
                 Log.d("KeyCuk", myKey.get(i));
                 Intent newIntent = new Intent(getContext(),ViewKandang.class);
                 newIntent.putExtra("KeyValue",myKey.get(i));
+                newIntent.putExtra("tgl",tgl.toString());
                 startActivity(newIntent);
             }
         });
@@ -70,6 +72,8 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Kandang kandang = dataSnapshot.getValue(Kandang.class);
+                tgl = kandang.getTanggal_datang();
+                Log.i("Data ternak", " : " + tgl);
                 myKey.add(dataSnapshot.getKey());
                 if(kandang != null){
                     curKandang.add(kandang);
