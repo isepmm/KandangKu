@@ -76,7 +76,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
                     float suhuSekarang = dataSnapshot.getValue(float.class);
-                    Log.d("suhusekarang", "" + String.valueOf(suhuSekarang));
+                    Log.d("suhuSekarang", "" + String.valueOf(suhuSekarang));
                     suhusekarang.setText(String.valueOf(suhuSekarang));
                 }
             }
