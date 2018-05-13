@@ -1,6 +1,5 @@
 package com.example.isepmm.kandangku;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.graphics.DashPathEffect;
 import android.support.v4.content.res.ResourcesCompat;
@@ -64,7 +63,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_fragment_grafik, container, false);
 
-        suhusekarang = (TextView) view.findViewById(R.id.suhusekarang);
+        suhusekarang = (TextView) view.findViewById(R.id.suhuSekarang);
         suhutertinggi = (TextView) view.findViewById(R.id.suhutertinggi);
         suhuterendah = (TextView) view.findViewById(R.id.suhuterendah);
         tanggalperiode = (TextView) view.findViewById(R.id.tglperiode);

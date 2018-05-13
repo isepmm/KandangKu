@@ -1,7 +1,6 @@
 package com.example.isepmm.kandangku;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.activity_fragment_remote, container, false);
 
 
-        suhuSekarang = (TextView) view.findViewById(R.id.suhusekarang);
+        suhuSekarang = (TextView) view.findViewById(R.id.suhuSekarang);
         kelembabanSekarang = (TextView) view.findViewById(R.id.kelembaban);
         suhuTertinggiView = (TextView) view.findViewById(R.id.tinggi);
         suhuTerendahView = (TextView) view.findViewById(R.id.rendah);
