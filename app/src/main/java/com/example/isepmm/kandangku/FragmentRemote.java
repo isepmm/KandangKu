@@ -1,5 +1,6 @@
 package com.example.isepmm.kandangku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,6 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment_remote, container, false);
-
 
         suhuSekarang = (TextView) view.findViewById(R.id.suhuSekarang);
         kelembabanSekarang = (TextView) view.findViewById(R.id.kelembaban);
@@ -109,6 +109,36 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
             }
         });
 
+        dataOnCooling.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(float.class) != null) {
+                    int on = dataSnapshot.getValue(Integer.class);
+                    onCooling.setText(String.valueOf(on));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dataOffCooling.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(float.class) != null) {
+                    int off = dataSnapshot.getValue(Integer.class);
+                    offCooling.setText(String.valueOf(off));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         ubah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +162,6 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
             dataTerendah.setValue(suhuRendah);
             dataOnCooling.setValue(onCooling);
             dataOffCooling.setValue(offCooling);
-
 
             Toast.makeText(getContext(), R.string.set, Toast.LENGTH_LONG).show();
         }

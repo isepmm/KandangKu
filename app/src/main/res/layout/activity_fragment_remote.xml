@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="8dp"
     android:background="@color/putih"
     android:orientation="vertical"
     tools:context="com.example.isepmm.kandangku.FragmentRemote">
@@ -73,13 +73,15 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_up" />
+                            app:srcCompat="@drawable/ic_up" />
 
                         <TextView
                             android:id="@+id/tinggi"
@@ -94,7 +96,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_measurement" />
+                            app:srcCompat="@drawable/ic_measurement" />
 
                     </LinearLayout>
 
@@ -102,12 +104,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_down" />
+                            app:srcCompat="@drawable/ic_down" />
 
                         <TextView
                             android:id="@+id/rendah"
@@ -122,18 +125,19 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_measurement" />
+                            app:srcCompat="@drawable/ic_measurement" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/water" />
+                            app:srcCompat="@drawable/water" />
 
                         <TextView
                             android:id="@+id/kelembaban"
@@ -162,7 +166,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/poop" />
+                            app:srcCompat="@drawable/poop" />
 
 
                         <TextView
@@ -205,10 +209,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_up" />
+                        app:srcCompat="@drawable/ic_up" />
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Set tinggi"
                         android:textSize="10sp"/>
 
@@ -223,10 +227,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_down" />
+                        app:srcCompat="@drawable/ic_down" />
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Set rendah"
                         android:textSize="10sp"/>
 
@@ -241,10 +245,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/water" />
+                        app:srcCompat="@drawable/water" />
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Kelembaban"
                         android:textSize="10sp"/>
 
@@ -253,13 +257,13 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:layout_weight="1">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/poop" />
+                        app:srcCompat="@drawable/poop" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

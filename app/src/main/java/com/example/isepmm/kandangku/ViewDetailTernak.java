@@ -1,9 +1,7 @@
 package com.example.isepmm.kandangku;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,14 +24,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.isepmm.kandangku.R.id.tanggal_datang;
 
-public class ViewKandang extends AppCompatActivity {
+import static com.example.isepmm.kandangku.R.id.tgl_datang;
+
+public class ViewDetailTernak extends AppCompatActivity {
 
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference periodeTernak;
 
-    private KandangAdapter mAdapter;
+    private PeriodeAdapter mAdapter;
 
     private String bulan[] = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Aguatua", "September", "Oktober", "November", "Desember"};
     private String dateToTitle = " ";
@@ -52,8 +54,9 @@ public class ViewKandang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_kandang);
+        setContentView(R.layout.activity_view_detail_ternak);
 
+        tanggal_datang = (TextView) findViewById(R.id.tanggal_datang);
         jumlah_total_doc = (TextView) findViewById(R.id.jumlah_total_doc);
         harga_doc = (TextView) findViewById(R.id.harga_doc);
         berat_panen = (TextView) findViewById(R.id.berat_panen);
@@ -64,6 +67,16 @@ public class ViewKandang extends AppCompatActivity {
         konsumsi_vitamin = (TextView) findViewById(R.id.konsumsi_vitamin);
         konsumsi_obat = (TextView) findViewById(R.id.konsumsi_obat);
         penggunaan_listrik = (TextView) findViewById(R.id.penggunaan_listrik);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tambah_ayam_mati);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewDetailTernak.this, FormAyamMati.class);
+                startActivity(intent);
+//                Toast.makeText(ViewDetailTernak.this, "UnderMaintenance!", Toast.LENGTH_LONG).show();
+            }
+        });
 
         //read firebase
         lastKey = getIntent().getStringExtra("KeyValue");
@@ -77,6 +90,7 @@ public class ViewKandang extends AppCompatActivity {
                     Kandang kandang = dataSnapshot.getValue(Kandang.class);
                     // Log.d("jumlahtotaldoc", "" + kandang.getJumlah_ayam());
                     mtanggalDatang = kandang.getTanggal_datang();
+                    tanggal_datang.setText(String.valueOf(kandang.getTanggal_datang()));
                     jumlah_total_doc.setText(String.valueOf(kandang.getJumlah_ayam()));
                     harga_doc.setText(String.valueOf(kandang.getHarga_doc()));
                     berat_panen.setText(String.valueOf(kandang.getBerat_panen()));
@@ -98,19 +112,12 @@ public class ViewKandang extends AppCompatActivity {
         Intent currentIntent = getIntent();
         String keyValue = currentIntent.getStringExtra("KeyValue");
         String tgl = currentIntent.getStringExtra("tgl");
-        Long title = Long.parseLong(tgl);
+//        Long title = Long.parseLong(tgl);
         Log.i("tgl ternak", " : " + tgl);
         DataKandang(keyValue);
-        setTitle(tgl);
+        setTitle("Detail Ternak");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tambah);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewKandang.this, Ayam.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void DataKandang(String key) {
@@ -126,9 +133,10 @@ public class ViewKandang extends AppCompatActivity {
                         int monthNumber = Integer.parseInt(unixTimestimeToString(kandang)[1]);
 
                         String mDayString = bulan[monthNumber - 1];
-                        dateToTitle = mTanggal_datang + ", " + mDayString + " " + mTahun_datang;
+                        tanggal_datang.setText(mTanggal_datang + " " + mDayString + " " + mTahun_datang);
+                        //dateToTitle = mTanggal_datang + " " + mDayString + " " + mTahun_datang;
                         Log.d("cek", kandang + " ");
-                        Log.d("cek2", dateToTitle);
+                        //Log.d("cek2", dateToTitle);
                     } else {
                         Log.d("cek", "");
                     }
@@ -151,18 +159,6 @@ public class ViewKandang extends AppCompatActivity {
         return time;
     }
 
-
-//    private String unixTimestime(long unixTimestime) {
-//        Date date = new java.util.Date(unixTimestime * 1000L);
-//// the format of your date
-//        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-//// give a timezone reference for formatting (see comment at the bottom)
-//        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-4"));
-//        String formattedDate = sdf.format(date);
-//        String[] time = formattedDate.split(" ");
-//        return formattedDate;
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -174,11 +170,13 @@ public class ViewKandang extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_history:
-                Intent history = new Intent(ViewKandang.this, History.class);
+                Intent history = new Intent(ViewDetailTernak.this, History.class);
                 startActivity(history);
+                //Toast.makeText(ViewDetailTernak.this, "Fitur masih dalam pengembangan", Toast.LENGTH_LONG).show();
+
                 return true;
             case R.id.edit:
-                Intent edit = new Intent(ViewKandang.this, EditKandang.class);
+                Intent edit = new Intent(ViewDetailTernak.this, EditKandang.class);
                 edit.putExtra("KeyValue", lastKey);
                 startActivity(edit);
                 return true;
@@ -186,10 +184,8 @@ public class ViewKandang extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
     @Override
     public void onBackPressed() {
-        Intent view = new Intent(ViewKandang.this, MainActivity.class);
-        startActivity(view);
+        super.onBackPressed();
     }
 }

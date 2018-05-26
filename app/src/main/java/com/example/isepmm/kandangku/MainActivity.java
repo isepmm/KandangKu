@@ -1,6 +1,7 @@
 package com.example.isepmm.kandangku;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String ARGS_DEVICE_ID = "device id";
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,21 +58,27 @@ public class MainActivity extends AppCompatActivity {
         setTitle(R.string.periode_ternak);
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+//        alertbox.setMessage(R.string.exit)
+//                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        moveTaskToBack(true);
+//                    }
+//                })
+//                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+//
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        arg0.dismiss();
+//                    }
+//                })
+//                .show();
+//    }
+
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-        alertbox.setMessage(R.string.exit)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        moveTaskToBack(true);
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        arg0.dismiss();
-                    }
-                })
-                .show();
+        Intent intent = new Intent(MainActivity.this, DeviceActivity.class);
+        startActivity(intent);
     }
 }

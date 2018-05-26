@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class EditKandang extends AppCompatActivity {
@@ -165,7 +163,7 @@ public class EditKandang extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     } else {
                         //Data uploaded successfully on the server
-                        Intent save = new Intent(EditKandang.this, ViewKandang.class);
+                        Intent save = new Intent(EditKandang.this, ViewDetailTernak.class);
                         save.putExtra("KeyValue", lastKey);
                         startActivity(save);
                         finish();
@@ -177,5 +175,4 @@ public class EditKandang extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

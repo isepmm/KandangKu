@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.isepmm.kandangku">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MulaiKandang" />
-        <activity android:name=".ViewKandang" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DeviceActivity"/>
+        <activity android:name=".MulaiTernak" />
+        <activity android:name=".ViewDetailTernak" />
         <activity android:name=".History" />
-        <activity android:name=".Ayam" />
-        <activity android:name=".EditKandang">
-        </activity>
+        <activity android:name=".EditKandang" />
+        <activity android:name=".ReaderActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".FormAyamMati" />
     </application>
 
 </manifest>

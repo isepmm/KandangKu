@@ -1,6 +1,7 @@
 package com.example.isepmm.kandangku;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -18,26 +20,31 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
-    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("Periode");
+import static android.content.ContentValues.TAG;
 
+public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
+    private String idDvice;
+    private ProgressBar loadingData;
     private ListView listTanggal;
-    private KandangAdapter mAdapter;
+    private PeriodeAdapter mAdapter;
     private ArrayList<String> myKey = new ArrayList<>();
     private Long tgl;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_periode_ternak, container, false);
+        View view = inflater.inflate(R.layout.activity_periode_ternak, container, false);
+
+        idDvice = getActivity().getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
+        Log.i(TAG, "idDeviceFIX: " + idDvice);
 
         listTanggal = (ListView) view.findViewById(R.id.recyclerview);
-        mAdapter = new KandangAdapter(getContext(),getDataKandang());
-
+        mAdapter = new PeriodeAdapter(getContext(),getDataKandang());
+        loadingData = (ProgressBar) view.findViewById(R.id.loading_data);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.tambah);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MulaiKandang.class);
+                Intent intent = new Intent(getContext(), MulaiTernak.class);
                 startActivity(intent);
             }
         });
@@ -47,6 +54,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
         }else{
             Log.d("Uji","baca");
         }
+        loadingData.setVisibility(View.VISIBLE);
 
         //listTanggal.setEmptyView();
         return view;
@@ -56,8 +64,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("KeyCuk", myKey.get(i));
-                Intent newIntent = new Intent(getContext(),ViewKandang.class);
+                Intent newIntent = new Intent(getContext(),ViewDetailTernak.class);
                 newIntent.putExtra("KeyValue",myKey.get(i));
                 newIntent.putExtra("tgl",tgl.toString());
                 startActivity(newIntent);
@@ -67,7 +74,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
 
     private ArrayList<Kandang> getDataKandang(){
         final ArrayList<Kandang> curKandang = new ArrayList<>();
-
+        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child(idDvice).child("Periode");
         dataRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -78,6 +85,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
                 if(kandang != null){
                     curKandang.add(kandang);
                     mAdapter.notifyDataSetChanged();
+                    loadingData.setVisibility(View.GONE);
                 }
             }
 
@@ -104,4 +112,5 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
 
         return curKandang;
     }
+
 }

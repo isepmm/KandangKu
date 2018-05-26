@@ -22,57 +22,64 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MulaiKandang extends AppCompatActivity {
+import static android.content.ContentValues.TAG;
 
-    DatabaseReference lastkey = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("LastKey");
-
-    private EditText tanggalmulai;
-    private EditText jumlahayam;
-    private EditText hargadoc;
-    private Button mulai;
-
-    private String lastKey = "";
-
+public class FormAyamMati extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
+
+    private String mKey;
+    private EditText ayammati;
+    private EditText tanggalsekarang;
+    private Button simpan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle("Mulai Berternak");
-        setContentView(R.layout.activity_mulai_kandang);
+        setContentView(R.layout.activity_form_ayam_mati);
 
-        tanggalmulai = (EditText) findViewById(R.id.tanggal_datang_doc);
-        jumlahayam = (EditText) findViewById(R.id.jumlah_ayam);
-        hargadoc = (EditText) findViewById(R.id.harga_doc);
-        mulai = (Button) findViewById(R.id.mulai);
+        tanggalsekarang = (EditText) findViewById(R.id.tgl_sekarang);
+        ayammati = (EditText) findViewById(R.id.ayam_mati);
+        simpan = (Button) findViewById(R.id.simpan);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        tanggalsekarang.setKeyListener(null);
 
-        tanggalmulai.setKeyListener(null);
-
-        tanggalmulai.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        tanggalsekarang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    datePicker(tanggalmulai);
+                    datePicker(tanggalsekarang);
                 }
             }
         });
-
-        mulai.setOnClickListener(new View.OnClickListener() {
+        //input ke firebase
+        simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!validationInputField()) {
                     return;
                 }
-                long unixDate = changeStringToUnixTimestamp(tanggalmulai.getText().toString());
-                String a = jumlahayam.getText().toString();
-                String b = hargadoc.getText().toString();
-                Kandang kandang = new Kandang(unixDate,Integer.valueOf(a),Long.valueOf(b),0,0,0,0,0,0,0,0);
-                String mKey = mDatabaseReference.push().getKey();
-                mDatabaseReference.child("MainProgram").child("Periode").child(mKey).setValue(kandang);
-                lastkey.setValue(mKey);
+                long unixDate = changeStringToUnixTimestamp(tanggalsekarang.getText().toString());
+                String a = ayammati.getText().toString();
+                Mati mati = new Mati(unixDate,Integer.valueOf(a));
+                mDatabaseReference.child("MainProgram").child("Periode").child(mKey).child("Ayam_Mati").push().setValue(mati);
                 finish();
+            }
+        });
+        ReadLaskey();
+    }
+    //ReadLastkey
+    private void ReadLaskey() {
+        mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mKey = dataSnapshot.getValue(String.class);
+                Log.i(TAG, "pucen: " + mKey);
+                //Log.i("ISEP", "onDataChange: "+mKey);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -86,7 +93,7 @@ public class MulaiKandang extends AppCompatActivity {
 
         DatePickerDialog mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                //selectedmonth = selectedmonth + 1;
+                //selectedday = selectedday + 1;
                 Calendar c = Calendar.getInstance();
                 c.set(selectedyear, selectedmonth, selectedday);
                 Date date = c.getTime();
@@ -108,15 +115,10 @@ public class MulaiKandang extends AppCompatActivity {
         }
         return  date.getTime()/1000;
     }
+
     private boolean validationInputField() {
         boolean isValid = true;
-        if (tanggalmulai.getText().toString().equals("")) {
-            Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
-            isValid = false;
-       } else if (jumlahayam.getText().toString().equals("")) {
-            Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
-            isValid = false;
-        } else if (hargadoc.getText().toString().equals("")) {
+        if (ayammati.getText().toString().equals("")) {
             Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
             isValid = false;
         }

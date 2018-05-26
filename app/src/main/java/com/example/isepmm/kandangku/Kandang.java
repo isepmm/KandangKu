@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class Kandang {
     private long tanggal_datang;
-    private long tanggal_sekarang;
+    //private long tanggal_sekarang;
     private long jumlah_ayam;
-    private long jumlah_ayam_mati;
+    //private long jumlah_ayam_mati;
     private long harga_doc;
     private long berat_panen;
     private long boarding;
@@ -42,27 +42,23 @@ public class Kandang {
         this.penggunaan_listrik = penggunaan_listrik;
     }
 
-    public Kandang(long tanggal_sekarang, long jumlah_ayam, long jumlah_ayam_mati) {
-        this.tanggal_sekarang = tanggal_sekarang;
-        this.jumlah_ayam = jumlah_ayam;
-        this.jumlah_ayam_mati = jumlah_ayam_mati;
-    }
+//    public Kandang(long tanggal_sekarang, long jumlah_ayam, long jumlah_ayam_mati) {
+//        this.tanggal_sekarang = tanggal_sekarang;
+//        this.jumlah_ayam = jumlah_ayam;
+//        this.jumlah_ayam_mati = jumlah_ayam_mati;
+//    }
 
     public long getTanggal_datang() {
         return tanggal_datang;
-    }
-
-    public long getTanggal_sekarang() {
-        return tanggal_sekarang;
     }
 
     public long getJumlah_ayam() {
         return jumlah_ayam;
     }
 
-    public long getJumlah_ayam_mati() {
-        return jumlah_ayam_mati;
-    }
+//    public long getJumlah_ayam_mati() {
+//        return jumlah_ayam_mati;
+//    }
 
     public long getHarga_doc() {
         return harga_doc;
@@ -102,6 +98,7 @@ public class Kandang {
 
     @Exclude
     public Map<String, Object> toMap() {
+
         HashMap<String, Object> result = new HashMap<>();
         result.put("tanggal_datang", tanggal_datang);
         result.put("jumlah_ayam", jumlah_ayam);

@@ -29,9 +29,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 
 public class FragmentGrafik extends android.support.v4.app.Fragment implements OnChartGestureListener, OnChartValueSelectedListener {
@@ -45,6 +49,8 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
 
     private String bulan[] = {"Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ags","Sep","Okt","Nov","Des"};
     private String dateToTitle = " ";
+    private DatabaseReference mDatabaseReference;
+    private String mKey;
 
     TextView suhusekarang;
     TextView suhutertinggi;
@@ -55,6 +61,9 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
     private LineDataSet mSetSuhu;
     private ArrayList<Entry> mValuesSuhu;
     View view;
+    //String mLastKey;
+
+
 
     public FragmentGrafik (){
 
@@ -67,14 +76,16 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         suhutertinggi = (TextView) view.findViewById(R.id.suhutertinggi);
         suhuterendah = (TextView) view.findViewById(R.id.suhuterendah);
         tanggalperiode = (TextView) view.findViewById(R.id.tglperiode);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        DataKandang();
+        ReadLaskey();
+
 
         datasekarang.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float suhuSekarang = dataSnapshot.getValue(float.class);
+                    int suhuSekarang = dataSnapshot.getValue(int.class);
                     Log.d("suhuSekarang", "" + String.valueOf(suhuSekarang));
                     suhusekarang.setText(String.valueOf(suhuSekarang));
                 }
@@ -89,7 +100,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float tinggi = dataSnapshot.getValue(float.class);
+                    int tinggi = dataSnapshot.getValue(int.class);
                     suhutertinggi.setText(String.valueOf(tinggi));
                 }
             }
@@ -103,7 +114,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(float.class) != null) {
-                    float rendah = dataSnapshot.getValue(float.class);
+                    int rendah = dataSnapshot.getValue(int.class);
                     suhuterendah.setText(String.valueOf(rendah));
                 }
             }
@@ -117,7 +128,23 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         mValuesSuhu = new ArrayList<>();
 
         devineDevice();
+
         return view;
+    }
+    private void ReadLaskey() {
+        mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mKey = dataSnapshot.getValue(String.class);
+                DataKandang();
+                readSuhu();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void DataKandang(){
@@ -200,19 +227,53 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         leftAxis.setDrawLimitLinesBehindData(true);
 
         mChart.getAxisRight().setEnabled(false);
-        readSuhu();
 
         mChart.animateX(2500);
         Legend l = mChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
     }
+    private String simpleDateFormat(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-d");
+        return df.format(c);
+    }
 
     private void readSuhu() {
-        for (int i = 0; i < 24; i++) {
-            mValuesSuhu.add(new Entry(i, (float) (Math.random() * 30 + 1))); // change to real data
-        }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        setData();
+        final DatabaseReference myRef = database.getReference();
+        myRef.keepSynced(true);
+
+        Log.i(TAG, "readSuhu: " + mKey);
+        myRef.child("MainProgram").child("Periode").child(mKey).child("Suhu").child(simpleDateFormat()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mValuesSuhu.clear();
+                int i = 0;
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    try {
+                        String data = userSnapshot.getValue(String.class);
+                        float value = Float.valueOf(data);
+                        Log.i(TAG, "onDataChange: " + data);
+                        final Entry entry = new Entry(i, value);
+                        mValuesSuhu.add(entry);
+                        Log.i(TAG, "DATASUHU: "+mValuesSuhu);
+                        i++;
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                setData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
     }
 
     private void setData() {
