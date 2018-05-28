@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#d7d7d7"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -17,36 +16,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/putih"
-            android:textAlignment="center"
-            android:padding="4dp"
+            android:padding="8dp"
             android:text="25/04/2018"
+            android:textStyle="bold"
             android:textColor="#000"
             android:textSize="23sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/putih"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="4dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:padding="4dp"
-                    android:text="Ayam Tersisa : "
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:padding="4dp"
-                    android:text="Jumlah Ayam Mati : "
+                    android:padding="8dp"
+                    android:text="Ayam Mati"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -54,19 +45,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="4dp">
-
-                <TextView
-                    android:id="@+id/ayam_tersisa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="2000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/ayam_mati"
@@ -74,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:padding="4dp"
+                    android:padding="8dp"
                     android:text="2"
                     android:textSize="16sp"
                     android:textStyle="bold" />

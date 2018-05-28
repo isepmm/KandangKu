@@ -1,14 +1,19 @@
 package com.example.isepmm.kandangku;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +22,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -31,7 +41,7 @@ import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 import static java.security.AccessController.getContext;
 
-public class DeviceActivity extends Activity {
+public class DeviceActivity extends AppCompatActivity {
     private String idDevice;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference uidUser = FirebaseDatabase.getInstance().getInstance().getReference().child("User");
@@ -46,6 +56,8 @@ public class DeviceActivity extends Activity {
     private ProgressBar loadingData;
     private DeviceAdapter mAdapter;
 
+    private GoogleApiClient mGoogleApiClient;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +71,11 @@ public class DeviceActivity extends Activity {
         mAdapter = new DeviceAdapter(this,getData());
         listDevice.setAdapter(mAdapter);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
         addDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +83,10 @@ public class DeviceActivity extends Activity {
                 startActivity(intent);
             }
         });
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, null)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         listDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,6 +97,7 @@ public class DeviceActivity extends Activity {
                 startActivity(data);
             }
         });
+        setTitle("Kandangku");
     }
 
     public ArrayList<Device> getData(){
@@ -122,7 +144,39 @@ public class DeviceActivity extends Activity {
         inflater.inflate(R.menu.menu_logout, menu);
         // return true so that the menu pop up is opened
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_keluar:
+                signOutCheck();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
+    private void signOutCheck() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DeviceActivity.this);
+        builder.setMessage("Yakin ingin keluar ?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(@NonNull Status status) {
+                                FirebaseAuth.getInstance().signOut();
+                                finish();
+                            }
+                        });
+                    }
+                }).setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
     }
 
 }

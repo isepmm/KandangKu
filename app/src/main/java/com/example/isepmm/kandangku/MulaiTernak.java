@@ -56,7 +56,7 @@ public class MulaiTernak extends AppCompatActivity {
                 }
             }
         });
-
+        //Input Ke Firebase
         mulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +75,7 @@ public class MulaiTernak extends AppCompatActivity {
             }
         });
     }
-
+    //Tanggal (android:inputType="date")
     private void datePicker(final EditText editText) {
         Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -106,6 +106,7 @@ public class MulaiTernak extends AppCompatActivity {
         }
         return  date.getTime()/1000;
     }
+    //Toast
     private boolean validationInputField() {
         boolean isValid = true;
         if (tanggalmulai.getText().toString().equals("")) {

@@ -36,13 +36,14 @@ public class FormAyamMati extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_ayam_mati);
-
+        mKey = getIntent().getStringExtra("KeyValue");
         tanggalsekarang = (EditText) findViewById(R.id.tgl_sekarang);
         ayammati = (EditText) findViewById(R.id.ayam_mati);
         simpan = (Button) findViewById(R.id.simpan);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         tanggalsekarang.setKeyListener(null);
+
 
         tanggalsekarang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -64,27 +65,13 @@ public class FormAyamMati extends AppCompatActivity {
                 Mati mati = new Mati(unixDate,Integer.valueOf(a));
                 mDatabaseReference.child("MainProgram").child("Periode").child(mKey).child("Ayam_Mati").push().setValue(mati);
                 finish();
-            }
-        });
-        ReadLaskey();
-    }
-    //ReadLastkey
-    private void ReadLaskey() {
-        mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mKey = dataSnapshot.getValue(String.class);
-                Log.i(TAG, "pucen: " + mKey);
-                //Log.i("ISEP", "onDataChange: "+mKey);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(FormAyamMati.this, "Data Berhasil Disimpan", Toast.LENGTH_LONG).show();
 
             }
         });
-    }
 
+    }
+    //Tanggal (android:inputType="date")
     private void datePicker(final EditText editText) {
         Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -119,6 +106,9 @@ public class FormAyamMati extends AppCompatActivity {
     private boolean validationInputField() {
         boolean isValid = true;
         if (ayammati.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
+            isValid = false;
+        }else if (tanggalsekarang.getText().toString().equals("")) {
             Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
             isValid = false;
         }

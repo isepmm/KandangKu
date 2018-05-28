@@ -9,11 +9,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,18 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-import static com.example.isepmm.kandangku.R.id.tgl_datang;
-
 public class ViewDetailTernak extends AppCompatActivity {
 
-    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference periodeTernak;
-
-    private PeriodeAdapter mAdapter;
-
-    private String bulan[] = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Aguatua", "September", "Oktober", "November", "Desember"};
-    private String dateToTitle = " ";
 
     TextView tanggal_datang;
     TextView jumlah_total_doc;
@@ -48,8 +37,9 @@ public class ViewDetailTernak extends AppCompatActivity {
     TextView konsumsi_pakan;
     TextView konsumsi_vitamin;
     TextView penggunaan_listrik;
+    TextView total_jumlah_ayam_mati;
     String lastKey;
-    Long mtanggalDatang;
+    //Long mtanggalDatang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,30 +57,35 @@ public class ViewDetailTernak extends AppCompatActivity {
         konsumsi_vitamin = (TextView) findViewById(R.id.konsumsi_vitamin);
         konsumsi_obat = (TextView) findViewById(R.id.konsumsi_obat);
         penggunaan_listrik = (TextView) findViewById(R.id.penggunaan_listrik);
+        total_jumlah_ayam_mati = (TextView) findViewById(R.id.total_jumlah_ayam_mati);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tambah_ayam_mati);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewDetailTernak.this, FormAyamMati.class);
+                intent.putExtra("KeyValue", lastKey);
                 startActivity(intent);
 //                Toast.makeText(ViewDetailTernak.this, "UnderMaintenance!", Toast.LENGTH_LONG).show();
             }
         });
-
-        //read firebase
+        //Read Key
         lastKey = getIntent().getStringExtra("KeyValue");
+        //Chlid Firebase
         periodeTernak = FirebaseDatabase.getInstance().getReference()
                 .child("MainProgram").child("Periode").child(lastKey);
-
+        //Raed data Dari Firebase
         periodeTernak.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(Kandang.class) != null) {
                     Kandang kandang = dataSnapshot.getValue(Kandang.class);
-                    // Log.d("jumlahtotaldoc", "" + kandang.getJumlah_ayam());
-                    mtanggalDatang = kandang.getTanggal_datang();
-                    tanggal_datang.setText(String.valueOf(kandang.getTanggal_datang()));
+                     Log.d("isepp", "" + kandang.getTotal_Ayam_Mati());
+
+                    long mtgl = kandang.getTanggal_datang();
+                    String textTgl = unixTimestimeToString(mtgl);
+                    tanggal_datang.setText(textTgl);
+
                     jumlah_total_doc.setText(String.valueOf(kandang.getJumlah_ayam()));
                     harga_doc.setText(String.valueOf(kandang.getHarga_doc()));
                     berat_panen.setText(String.valueOf(kandang.getBerat_panen()));
@@ -101,6 +96,7 @@ public class ViewDetailTernak extends AppCompatActivity {
                     konsumsi_vitamin.setText(String.valueOf(kandang.getKonsumsi_vitamin()));
                     konsumsi_obat.setText(String.valueOf(kandang.getKonsumsi_obat()));
                     penggunaan_listrik.setText(String.valueOf(kandang.getPenggunaan_listrik()));
+                    total_jumlah_ayam_mati.setText(String.valueOf(kandang.getTotal_Ayam_Mati()));
                 }
             }
 
@@ -109,54 +105,14 @@ public class ViewDetailTernak extends AppCompatActivity {
             }
         });
 
-        Intent currentIntent = getIntent();
-        String keyValue = currentIntent.getStringExtra("KeyValue");
-        String tgl = currentIntent.getStringExtra("tgl");
-//        Long title = Long.parseLong(tgl);
-        Log.i("tgl ternak", " : " + tgl);
-        DataKandang(keyValue);
         setTitle("Detail Ternak");
-
-
     }
 
-    private void DataKandang(String key) {
-        DatabaseReference curData = dataRef.child("MainProgram").child("Periode").child(key);
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Long kandang = data.child("tanggal_datang").getValue(Long.class);
-                    if (kandang != null) {
-                        String mTahun_datang = unixTimestimeToString(kandang)[0];
-                        String mTanggal_datang = unixTimestimeToString(kandang)[2];
-                        int monthNumber = Integer.parseInt(unixTimestimeToString(kandang)[1]);
-
-                        String mDayString = bulan[monthNumber - 1];
-                        tanggal_datang.setText(mTanggal_datang + " " + mDayString + " " + mTahun_datang);
-                        //dateToTitle = mTanggal_datang + " " + mDayString + " " + mTahun_datang;
-                        Log.d("cek", kandang + " ");
-                        //Log.d("cek2", dateToTitle);
-                    } else {
-                        Log.d("cek", "");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        curData.addListenerForSingleValueEvent(listener);
-    }
-
-    private String[] unixTimestimeToString(long unixTimestime) {
+    private String unixTimestimeToString(long unixTimestime) {
         Date date = new Date(unixTimestime * 1000L);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd HH mm ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = sdf.format(date);
-        String[] time = formattedDate.split(" ");
-        return time;
+        return formattedDate;
     }
 
     @Override
@@ -171,6 +127,7 @@ public class ViewDetailTernak extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_history:
                 Intent history = new Intent(ViewDetailTernak.this, History.class);
+                history.putExtra("KeyValue", lastKey);
                 startActivity(history);
                 //Toast.makeText(ViewDetailTernak.this, "Fitur masih dalam pengembangan", Toast.LENGTH_LONG).show();
 

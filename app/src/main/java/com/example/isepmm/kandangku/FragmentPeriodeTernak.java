@@ -66,6 +66,7 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent newIntent = new Intent(getContext(),ViewDetailTernak.class);
                 newIntent.putExtra("KeyValue",myKey.get(i));
+                Log.i(TAG, "ID?LASTKEY : "+myKey.get(i));
                 newIntent.putExtra("tgl",tgl.toString());
                 startActivity(newIntent);
             }

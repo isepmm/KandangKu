@@ -21,7 +21,7 @@ public class PeriodeAdapter extends ArrayAdapter<Kandang> {
 
     private TextView tanggal_datang;
 
-    private String bulan[] = {"Januari","Februari","Maret","April","Mei","Juni","Juli","Aguatua","September","Oktober","November","Desember"};
+    private String bulan[] = {"Januari","Februari","Maret","April","Mei","Juni","Juli","Agsatus","September","Oktober","November","Desember"};
     public PeriodeAdapter(Context context, List objects) {
         super(context, 0, objects);
     }

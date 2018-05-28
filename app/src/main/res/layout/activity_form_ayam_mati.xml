@@ -9,59 +9,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="14dp"
-            android:text="Form Ayam Mati"
-            android:textStyle="bold" />
+            android:padding="16dp">
 
-        <View
+            <TextView
+                android:id="@+id/tanggal_datang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Form Ayam Mati"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="#000000" />
+            android:layout_height="wrap_content">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/hitam" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="14dp"
-            android:text="Ayam Hidup" />
-
-        <TextView
-            android:id="@+id/ayam_hidup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="14dp"
-            android:text="1000" />
-
-        <EditText
-            android:id="@+id/ayam_mati"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="ayam mati"
-            android:inputType="date"
-            android:maxLines="1"
-            android:padding="14dp"
-            android:textSize="16sp" />
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-        <EditText
-            android:id="@+id/tgl_sekarang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="tanggal sekarang"
-            android:inputType="date"
-            android:maxLines="1"
-            android:padding="14dp"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    android:text="Tanggal Sekarang"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    android:text="Ayam Mati"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/tgl_sekarang"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="Tanggal Sekarang"
+                    android:inputType="date"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/ayam_mati"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="Ayam Mati"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,8 +116,8 @@
                 android:gravity="center"
                 android:text="@string/simpan"
                 android:textColor="#ffffff" />
-
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

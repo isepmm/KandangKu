@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FragmentRemote extends android.support.v4.app.Fragment {
+    //Chlid Firebase
     DatabaseReference dataSekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
     DatabaseReference dataKelembaban = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("KelembabanSekarang");
     DatabaseReference dataTertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
@@ -48,6 +49,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         offCooling = (EditText) view.findViewById(R.id.offCooling);
         ubah = (Button) view.findViewById(R.id.ubah);
 
+        //Read Data Suhu Sekarang
         dataSekarang.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -61,7 +63,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
+        //Read Data Suhu Kelembaban
         dataKelembaban.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,7 +78,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
-
+        //Read Data Suhu Tertinggi
         dataTertinggi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,6 +94,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
+        //Read Data Suhu Terendah
         dataTerendah.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -108,7 +111,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
-
+        //Read Data OnCooling
         dataOnCooling.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -123,7 +126,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
-
+        //Read Data OffCooling
         dataOffCooling.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -138,7 +141,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
             }
         });
-
+        //untuk mengubah data
         ubah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,7 +151,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
         return view;
     }
-
+    //Input data ke Firebase
     public void writeNewPost(EditText SuhuTertinggi, EditText SuhuTerendah, EditText OnCooling, EditText OffCooling ) {
         if (!validationInputField(Integer.valueOf(SuhuTertinggi.getText().
                 toString()),Integer.valueOf(SuhuTerendah.getText().toString()))) {
@@ -166,7 +169,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
             Toast.makeText(getContext(), R.string.set, Toast.LENGTH_LONG).show();
         }
     }
-
+    //Toast
     private boolean validationInputField(int tinggi, int rendah) {
         boolean isValid = true;
         if (suhuTertinggi.getText().toString().equals("")) {

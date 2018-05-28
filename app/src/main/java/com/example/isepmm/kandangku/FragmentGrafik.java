@@ -39,6 +39,7 @@ import static android.content.ContentValues.TAG;
 
 
 public class FragmentGrafik extends android.support.v4.app.Fragment implements OnChartGestureListener, OnChartValueSelectedListener {
+    //Chlid Firebase
     DatabaseReference datasekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
     DatabaseReference datatertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
     DatabaseReference dataterendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
@@ -47,7 +48,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
 
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
 
-    private String bulan[] = {"Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ags","Sep","Okt","Nov","Des"};
+    private String bulan[] = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
     private String dateToTitle = " ";
     private DatabaseReference mDatabaseReference;
     private String mKey;
@@ -61,13 +62,11 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
     private LineDataSet mSetSuhu;
     private ArrayList<Entry> mValuesSuhu;
     View view;
-    //String mLastKey;
 
-
-
-    public FragmentGrafik (){
+    public FragmentGrafik() {
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_fragment_grafik, container, false);
@@ -80,7 +79,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
 
         ReadLaskey();
 
-
+        //Read Data Suhu Sekarang
         datasekarang.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -95,7 +94,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
+        //Read Data Suhu Tertinggi
         datatertinggi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -110,6 +109,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
 
             }
         });
+        //Read Data Suhu Terendah
         dataterendah.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -131,6 +131,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
 
         return view;
     }
+    //Read LastKey
     private void ReadLaskey() {
         mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
             @Override
@@ -147,27 +148,27 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         });
     }
 
-    private void DataKandang(){
+    private void DataKandang() {
         final ArrayList<Long> tanggalKandang = new ArrayList<>();
         DatabaseReference curData = dataRef.child("MainProgram").child("Periode");
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot data : dataSnapshot.getChildren()){
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Long kandang = data.child("tanggal_datang").getValue(Long.class);
-                    if(kandang != null){
+                    if (kandang != null) {
                         tanggalKandang.add(kandang);
-                    }else{
-                        Log.d("Cek","cek");
+                    } else {
+                        Log.d("Cek", "cek");
                     }
                 }
                 String mTahun_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[0];
                 String mTanggal_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[2];
                 int monthNumber = Integer.parseInt(unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[1]);
 
-                String mDayString = bulan[monthNumber-1];
+                String mDayString = bulan[monthNumber - 1];
                 dateToTitle = mTanggal_datang + ", " + mDayString + " " + mTahun_datang;
-                Log.d("Hasil",""+ dateToTitle);
+                Log.d("Hasil", "" + dateToTitle);
                 tanggalperiode.setText(dateToTitle);
             }
 
@@ -179,8 +180,8 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         curData.addListenerForSingleValueEvent(listener);
     }
 
-    private String[] unixTimestimeToString(long unixTimestime){
-        Date date = new Date(unixTimestime*1000L);
+    private String[] unixTimestimeToString(long unixTimestime) {
+        Date date = new Date(unixTimestime * 1000L);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd HH mm ss");
         String formattedDate = sdf.format(date);
         String[] time = formattedDate.split(" ");
@@ -232,7 +233,8 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         Legend l = mChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
     }
-    private String simpleDateFormat(){
+
+    private String simpleDateFormat() {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-M-d");
         return df.format(c);
@@ -257,7 +259,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
                         Log.i(TAG, "onDataChange: " + data);
                         final Entry entry = new Entry(i, value);
                         mValuesSuhu.add(entry);
-                        Log.i(TAG, "DATASUHU: "+mValuesSuhu);
+                        Log.i(TAG, "DATASUHU: " + mValuesSuhu);
                         i++;
                     } catch (NullPointerException e) {
                         e.printStackTrace();

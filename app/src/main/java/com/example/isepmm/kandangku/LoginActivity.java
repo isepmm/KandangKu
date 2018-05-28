@@ -91,11 +91,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show();
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
                 loadingLogin.setVisibility(View.GONE);
-                Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login Gagal", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -135,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
      */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            loadingLogin.setVisibility(View.GONE);
             Intent goToNextActivity = new Intent(this, DeviceActivity.class);
             startActivity(goToNextActivity);
         }

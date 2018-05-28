@@ -15,15 +15,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class History extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private String mKey;
     private ListView listHistory;
     private MatiAdapter mAdapter;
+    ArrayList<Mati> list;
 
 
+    TextView tanggalsekarang;
     TextView ayammati;
 
     @Override
@@ -32,42 +36,30 @@ public class History extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
+        mKey = getIntent().getStringExtra("KeyValue");//readkey
         listHistory = (ListView) findViewById(R.id.viewhistory);
+        tanggalsekarang = (TextView) findViewById(R.id.tanggal_datang);
         ayammati = (TextView) findViewById(R.id.ayam_mati);
-        ReadLaskey();
-        mAdapter = new MatiAdapter(this, getDataHistory());
+        getDataHistory();
+
+        //ArrayList
+        list = new ArrayList<>();
+        mAdapter = new MatiAdapter(this, list);
         listHistory.setAdapter(mAdapter);
-
     }
-    //    readlastkey
-    private void ReadLaskey() {
-        mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mKey = dataSnapshot.getValue(String.class);
-                Log.i("kunci", "onDataChange: " + mKey);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private ArrayList<Mati> getDataHistory() {
-        final ArrayList<Mati> curMati = new ArrayList<>();
+    //Read History
+    private void getDataHistory() {
         mDatabaseReference.child("MainProgram").child("Periode").child(mKey).child("Ayam_Mati")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        curMati.clear();
-                            for(DataSnapshot data : dataSnapshot.getChildren()){
-                                Mati mati = data.getValue(Mati.class);
-                                Mati AyamMati = new Mati(mati,data.getKey());
-                                curMati.add(AyamMati);
-                                Log.i("ISP", "onDataChange: "+mati);
-                            }
+                        list.clear();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Mati mati = data.getValue(Mati.class);
+                            Mati AyamMati = new Mati(mati, data.getKey());
+                            list.add(AyamMati);
+                            Log.i("AyamMati", "onDataChange: " + mati);
+                        }
                         mAdapter.notifyDataSetChanged();
                     }
 
@@ -76,7 +68,6 @@ public class History extends AppCompatActivity {
 
                     }
                 });
-        return curMati;
     }
 
     @Override

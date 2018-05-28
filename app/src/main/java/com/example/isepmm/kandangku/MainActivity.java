@@ -58,24 +58,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle(R.string.periode_ternak);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-//        alertbox.setMessage(R.string.exit)
-//                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        moveTaskToBack(true);
-//                    }
-//                })
-//                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-//
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        arg0.dismiss();
-//                    }
-//                })
-//                .show();
-//    }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(MainActivity.this, DeviceActivity.class);

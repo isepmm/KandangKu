@@ -20,13 +20,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,17 +39,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Detail Ternak"
-                    android:textStyle="bold"/>
+                    android:text="23, Mei 2018"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/hitam"/>
+                    android:background="@color/hitam" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +71,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Jumlah Total DOC"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -74,7 +79,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Harga DOC"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -83,7 +88,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Berat Panen"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -91,7 +96,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Boarding"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -99,7 +104,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Harga Pasar"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -107,7 +112,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Konsumsi Minum"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -115,7 +120,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Konsumsi Pakan"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -123,7 +128,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Konsumsi Vitamin"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -131,7 +136,7 @@
                         android:layout_marginTop="4dp"
                         android:padding="4dp"
                         android:text="Konsumsi Obat"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -154,11 +159,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="150000"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/harga_doc"
@@ -176,137 +181,132 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/boarding"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/harga_pasar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/konsumsi_minum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/konsumsi_pakan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/konsumsi_vitamin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/konsumsi_obat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/penggunaan_listrik"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_margin="10dp"
-                    android:background="@color/hitam"/>
+                    android:background="@color/hitam" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Input Ayam Mati"
-                    android:textStyle="bold" />
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jumlah Ayam Mati"/>
+                        android:text="Total Jumlah Ayam Mati" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3">
 
                     <TextView
-                        android:id="@+id/ayam_mati"
+                        android:id="@+id/total_jumlah_ayam_mati"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

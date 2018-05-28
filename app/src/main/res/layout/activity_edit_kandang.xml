@@ -1,254 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d7d7d7"
     tools:context="com.example.isepmm.kandangku.EditKandang">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="16dp">
 
             <TextView
+                android:id="@+id/tanggal_datang"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Jumlah Total DOC"
-                android:textSize="16sp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Tanggal Datang"
+                android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Harga DOC"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Berat Panen"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Boarding"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Harga Pasar"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Konsumsi Minum"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Konsumsi Pakan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Konsumsi Vitamin"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Penggunaan Obat"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="Penggunaan Listrik"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/hitam" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/jumlah_total_doc"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:text="150000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
 
-            <EditText
-                android:id="@+id/harga_doc"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:text="5000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Jumlah Total DOC"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/berat_panen"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:hint="0"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Harga DOC"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/boarding"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Berat Panen"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/harga_pasar"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Boarding"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/konsumsi_minum"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Harga Pasar"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/konsumsi_pakan"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Konsumsi Minum"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/konsumsi_vitamin"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Konsumsi Pakan"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/konsumsi_obat"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Konsumsi Vitamin"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Penggunaan Obat"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:text="Penggunaan Listrik"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <EditText
+                    android:id="@+id/jumlah_total_doc"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:text="150000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/harga_doc"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:text="5000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/berat_panen"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/boarding"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/harga_pasar"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/konsumsi_minum"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/konsumsi_pakan"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/konsumsi_vitamin"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/konsumsi_obat"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
 
-            <EditText
-                android:id="@+id/penggunaan_listrik"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:maxLines="1"
-                android:inputType="number"
-                android:hint="0"/>
+                <EditText
+                    android:id="@+id/penggunaan_listrik"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
