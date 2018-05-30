@@ -23,7 +23,8 @@ import java.util.Map;
 
 public class EditKandang extends AppCompatActivity {
 
-    DatabaseReference periodeTernak;
+    private DatabaseReference periodeTernak;
+    private String idDevice;
 
     TextView tanggal_datang;
     EditText jumlah_total_doc;
@@ -55,11 +56,14 @@ public class EditKandang extends AppCompatActivity {
         konsumsi_obat = (EditText) findViewById(R.id.konsumsi_obat);
         penggunaan_listrik = (EditText) findViewById(R.id.penggunaan_listrik);
 
+        idDevice = getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
+
         //read firebase
         lastKey = getIntent().getStringExtra("KeyValue");
         //Chlid Firebase
+        Log.i("pesi", "onCreate: "+idDevice);
         periodeTernak = FirebaseDatabase.getInstance().getReference()
-                .child("MainProgram").child("Periode").child(lastKey);
+                .child(idDevice).child("Periode").child(lastKey);
         //Raed data Dari Firebase
         periodeTernak.addValueEventListener(new ValueEventListener() {
             @Override
@@ -136,6 +140,11 @@ public class EditKandang extends AppCompatActivity {
                     }
                 }
             });
+                Intent intent = new Intent(this,ViewDetailTernak.class);
+                String id = idDevice;
+                intent.putExtra(MainActivity.ARGS_DEVICE_ID, id);
+                intent.putExtra("KeyValue", lastKey);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

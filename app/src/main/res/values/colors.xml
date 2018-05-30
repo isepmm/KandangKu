@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#21759B</color>
-    <color name="colorPrimaryDark">#21759B</color>
-    <color name="colorAccent">#21759B</color>
+    <color name="colorPrimary">#964B00</color>
+    <color name="colorPrimaryDark">#964B00</color>
+    <color name="colorAccent">#964B00</color>
     <color name="hitam">#000000</color>
     <color name="putih">#ffffff</color>
     <color name="merahtua">#F3B2B1</color>
     <color name="merahmuda">#FE7A7A</color>
-    <color name="biru">#21759B</color>
+    <color name="biru">#964B00</color>
     <color name="abu">#F2F2F2</color>
     <color name="abu2">#E6E6E6</color>
     <color name="abu3">#BBBDBF</color>
     <color name="colorChart">#f99c93</color>
-    <color name="Tamiya">#ff7f00</color>
+    <color name="Tamiya">#FF0000</color>
 </resources>

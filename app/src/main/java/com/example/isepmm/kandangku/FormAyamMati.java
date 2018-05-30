@@ -31,6 +31,7 @@ public class FormAyamMati extends AppCompatActivity {
     private EditText ayammati;
     private EditText tanggalsekarang;
     private Button simpan;
+    private String idDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class FormAyamMati extends AppCompatActivity {
         tanggalsekarang = (EditText) findViewById(R.id.tgl_sekarang);
         ayammati = (EditText) findViewById(R.id.ayam_mati);
         simpan = (Button) findViewById(R.id.simpan);
+        idDevice = getIntent().getStringExtra("idDevice");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         tanggalsekarang.setKeyListener(null);
@@ -63,7 +65,8 @@ public class FormAyamMati extends AppCompatActivity {
                 long unixDate = changeStringToUnixTimestamp(tanggalsekarang.getText().toString());
                 String a = ayammati.getText().toString();
                 Mati mati = new Mati(unixDate,Integer.valueOf(a));
-                mDatabaseReference.child("MainProgram").child("Periode").child(mKey).child("Ayam_Mati").push().setValue(mati);
+                mDatabaseReference.child(idDevice).child("Periode").child(mKey).child("Ayam_Mati").push().setValue(mati);
+                getDataHistory();
                 finish();
                 Toast.makeText(FormAyamMati.this, "Data Berhasil Disimpan", Toast.LENGTH_LONG).show();
 
@@ -113,5 +116,29 @@ public class FormAyamMati extends AppCompatActivity {
             isValid = false;
         }
         return isValid;
+    }
+
+    private void getDataHistory() {
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mDatabaseReference.child(idDevice).child("Periode").child(mKey).child("Ayam_Mati")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        long jumlahTotal = 0;
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            jumlahTotal = jumlahTotal + data.child("jumlah_ayam_mati").getValue(Long.class);
+                        }
+                        mDatabaseReference
+                                .child(idDevice)
+                                .child("Periode")
+                                .child(mKey)
+                                .child("total_ayam_mati")
+                                .setValue(jumlahTotal);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 }

@@ -9,8 +9,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     public static final String ARGS_DEVICE_ID = "device id";
+    private DatabaseReference mDatabaseReference;
+    String idDevice;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -18,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentPeriodeTernak fragmentDataTernak = new FragmentPeriodeTernak();
         FragmentRemote fragmentRemote = new FragmentRemote();
         FragmentGrafik fragmentGrafik = new FragmentGrafik();
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -56,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         changeFragment(new FragmentPeriodeTernak());
         setTitle(R.string.periode_ternak);
+        idDevice = getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
     }
 
     @Override
@@ -63,4 +73,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, DeviceActivity.class);
         startActivity(intent);
     }
+
 }

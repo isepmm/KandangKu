@@ -24,12 +24,13 @@ import java.util.Date;
 
 public class MulaiTernak extends AppCompatActivity {
 
-    DatabaseReference lastkey = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("LastKey");
+    DatabaseReference lastkey = FirebaseDatabase.getInstance().getReference();
 
     private EditText tanggalmulai;
     private EditText jumlahayam;
     private EditText hargadoc;
     private Button mulai;
+    String idDevices;
 
     private DatabaseReference mDatabaseReference;
 
@@ -39,6 +40,7 @@ public class MulaiTernak extends AppCompatActivity {
         this.setTitle("Mulai Berternak");
         setContentView(R.layout.activity_mulai_ternak);
 
+        idDevices = getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
         tanggalmulai = (EditText) findViewById(R.id.tanggal_datang_doc);
         jumlahayam = (EditText) findViewById(R.id.jumlah_ayam);
         hargadoc = (EditText) findViewById(R.id.harga_doc);
@@ -63,13 +65,14 @@ public class MulaiTernak extends AppCompatActivity {
                 if (!validationInputField()) {
                     return;
                 }
+
                 long unixDate = changeStringToUnixTimestamp(tanggalmulai.getText().toString());
                 String a = jumlahayam.getText().toString();
                 String b = hargadoc.getText().toString();
                 Kandang kandang = new Kandang(unixDate,Integer.valueOf(a),Long.valueOf(b),0,0,0,0,0,0,0,0);
                 String mKey = mDatabaseReference.push().getKey();
-                mDatabaseReference.child("MainProgram").child("Periode").child(mKey).setValue(kandang);
-                lastkey.setValue(mKey);
+                mDatabaseReference.child(idDevices).child("Periode").child(mKey).setValue(kandang);
+                lastkey.child(idDevices).child("LastKey").setValue(mKey);
                 finish();
 
             }

@@ -68,7 +68,9 @@ public class DeviceActivity extends AppCompatActivity {
         addDevice = (FloatingActionButton) findViewById((R.id.scan_device));
         loadingData = (ProgressBar) findViewById(R.id.loading_data);
 
-        mAdapter = new DeviceAdapter(this,getData());
+        final ArrayList<Device> devices = getData();
+
+        mAdapter = new DeviceAdapter(this, devices);
         listDevice.setAdapter(mAdapter);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -92,8 +94,9 @@ public class DeviceActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent data = new Intent(DeviceActivity.this, MainActivity.class);
-                data.putExtra(MainActivity.ARGS_DEVICE_ID, idDevice);
-                Log.i(TAG, "idDeviceFIX : "+idDevice);
+                String id = devices.get(i).getDeviceId();
+                data.putExtra(MainActivity.ARGS_DEVICE_ID, id);
+                Log.i(TAG, "idDeviceFIX : "+id);
                 startActivity(data);
             }
         });

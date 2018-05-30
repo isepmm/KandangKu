@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     android:background="@color/putih"
     android:orientation="vertical"
+    android:padding="8dp"
     tools:context="com.example.isepmm.kandangku.FragmentRemote">
 
     <ScrollView
@@ -31,8 +30,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/termometer"/>
+                    app:srcCompat="@drawable/termometer" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -75,8 +75,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:padding="4dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="4dp">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -104,8 +104,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:padding="4dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="4dp">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -127,12 +127,13 @@
                             android:layout_height="match_parent"
                             app:srcCompat="@drawable/ic_measurement" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:padding="4dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="4dp">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -166,30 +167,23 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:padding="4dp"
                             app:srcCompat="@drawable/poop" />
-
 
                         <TextView
                             android:id="@+id/amonia"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text=" _ _"
+                            android:padding="4dp"
+                            android:text="30"
                             android:textColor="#000000"
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text=" ppm"
-                            android:textSize="24sp" />
                     </LinearLayout>
 
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -202,90 +196,97 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:layout_weight="1">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_up" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Set tinggi"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:layout_weight="1">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_down" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Set rendah"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="10dp"
-                    android:layout_weight="1">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/water" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kelembaban"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:padding="8dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/poop" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amonia"
                         android:gravity="center"
-                        android:textSize="10sp"/>
+                        android:text="Amonia\n /ppm"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:padding="24dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:padding="24dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="Atur Suhu Kandang"
-                android:textColor="#000000"
                 android:textAlignment="textStart"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -298,12 +299,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <TextView
+                            android:id="@+id/textView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -311,9 +314,11 @@
                             android:textColor="#000000"
                             android:textSize="16sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <EditText
                             android:id="@+id/suhutertinggi"
                             android:layout_width="60dp"
@@ -322,10 +327,11 @@
                             android:gravity="center"
                             android:hint="0"
                             android:inputType="number"
-                            android:textStyle="bold"
                             android:maxLines="1"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -334,8 +340,8 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Celcius"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="Celcius" />
 
                     </LinearLayout>
 
@@ -359,9 +365,11 @@
                             android:textColor="#000000"
                             android:textSize="16sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <EditText
                             android:id="@+id/suhuterendah"
                             android:layout_width="60dp"
@@ -370,10 +378,11 @@
                             android:gravity="center"
                             android:hint="0"
                             android:inputType="number"
-                            android:textStyle="bold"
                             android:maxLines="1"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -382,21 +391,22 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Celcius"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="Celcius" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="Atur Waktu Coolingpad"
-                android:textColor="#000000"
                 android:textAlignment="textStart"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -409,6 +419,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -422,9 +433,11 @@
                             android:textColor="#000000"
                             android:textSize="16sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <EditText
                             android:id="@+id/onCoolling"
                             android:layout_width="60dp"
@@ -433,10 +446,11 @@
                             android:gravity="center"
                             android:hint="0"
                             android:inputType="number"
-                            android:textStyle="bold"
                             android:maxLines="1"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -445,8 +459,8 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Menit"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="Menit" />
 
                     </LinearLayout>
 
@@ -470,9 +484,11 @@
                             android:textColor="#000000"
                             android:textSize="16sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <EditText
                             android:id="@+id/offCooling"
                             android:layout_width="60dp"
@@ -481,10 +497,11 @@
                             android:gravity="center"
                             android:hint="0"
                             android:inputType="number"
-                            android:textStyle="bold"
                             android:maxLines="1"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -493,24 +510,25 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Menit"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="Menit" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/ubah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimary"
                 android:text="atur"
-                android:textColor="#ffffff"
                 android:textAlignment="center"
-                android:layout_gravity="center"/>
+                android:textColor="#ffffff" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

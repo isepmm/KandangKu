@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,24 +38,40 @@ import static android.content.ContentValues.TAG;
 
 
 public class FragmentGrafik extends android.support.v4.app.Fragment implements OnChartGestureListener, OnChartValueSelectedListener {
-    //Chlid Firebase
-    DatabaseReference datasekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuSekarang");
-    DatabaseReference datatertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
-    DatabaseReference dataterendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
-
-    DatabaseReference suhu = FirebaseDatabase.getInstance().getReference();
 
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
 
     private String bulan[] = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
     private String dateToTitle = " ";
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference dataPrediksi;
+    private DatabaseReference ayamMati;
+    private DatabaseReference hargaAyam;
     private String mKey;
+    private String idDevice;
 
-    TextView suhusekarang;
-    TextView suhutertinggi;
-    TextView suhuterendah;
+    private long prediksiRansum1;
+    private long prediksiRansum2;
+    private long prediksiRansum3;
+    private long prediksiRansum4;
+    private long prediksiRansum5;
+    private long prediksiPanen1;
+    private long prediksiPanen2;
+    private long prediksiPanen3;
+    private long prediksiPanen4;
+    private long prediksiPanen5;
+
     TextView tanggalperiode;
+    TextView ransum1;
+    TextView ransum2;
+    TextView ransum3;
+    TextView ransum4;
+    TextView ransum5;
+    TextView panen1;
+    TextView panen2;
+    TextView panen3;
+    TextView panen4;
+    TextView panen5;
 
     private LineChart mChart;
     private LineDataSet mSetSuhu;
@@ -71,72 +86,34 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_fragment_grafik, container, false);
 
-        suhusekarang = (TextView) view.findViewById(R.id.suhuSekarang);
-        suhutertinggi = (TextView) view.findViewById(R.id.suhutertinggi);
-        suhuterendah = (TextView) view.findViewById(R.id.suhuterendah);
         tanggalperiode = (TextView) view.findViewById(R.id.tglperiode);
+        ransum1 = (TextView) view.findViewById(R.id.ransum1);
+        ransum2 = (TextView) view.findViewById(R.id.ransum2);
+        ransum3 = (TextView) view.findViewById(R.id.ransum3);
+        ransum4 = (TextView) view.findViewById(R.id.ransum4);
+        ransum5 = (TextView) view.findViewById(R.id.ransum5);
+        panen1 = (TextView) view.findViewById(R.id.panen1);
+        panen2 = (TextView) view.findViewById(R.id.panen2);
+        panen3 = (TextView) view.findViewById(R.id.panen3);
+        panen4 = (TextView) view.findViewById(R.id.panen4);
+        panen5 = (TextView) view.findViewById(R.id.panen5);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        ReadLaskey();
-
-        //Read Data Suhu Sekarang
-        datasekarang.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
-                    int suhuSekarang = dataSnapshot.getValue(int.class);
-                    Log.d("suhuSekarang", "" + String.valueOf(suhuSekarang));
-                    suhusekarang.setText(String.valueOf(suhuSekarang));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-        //Read Data Suhu Tertinggi
-        datatertinggi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
-                    int tinggi = dataSnapshot.getValue(int.class);
-                    suhutertinggi.setText(String.valueOf(tinggi));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        //Read Data Suhu Terendah
-        dataterendah.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
-                    int rendah = dataSnapshot.getValue(int.class);
-                    suhuterendah.setText(String.valueOf(rendah));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        idDevice = getActivity().getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
         mValuesSuhu = new ArrayList<>();
-
         devineDevice();
+        databaseReference();
 
         return view;
     }
-    //Read LastKey
-    private void ReadLaskey() {
-        mDatabaseReference.child("MainProgram").child("LastKey").addValueEventListener(new ValueEventListener() {
+
+    private void databaseReference(){
+        mDatabaseReference.child(idDevice).child("LastKey").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mKey = dataSnapshot.getValue(String.class);
+                Log.i(TAG, "onDataChange: "+mKey);
+                getDataPrediksi(mKey);
                 DataKandang();
                 readSuhu();
             }
@@ -148,9 +125,60 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         });
     }
 
+    private  void getDataPrediksi(String mKey){
+        dataPrediksi = FirebaseDatabase.getInstance().getReference().child(idDevice).child("Periode").child(mKey);
+        dataPrediksi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    long mAyamHidup = dataSnapshot.child("jumlah_ayam").getValue(Long.class);
+                    long mAyamMati = dataSnapshot.child("total_ayam_mati").getValue(Long.class);
+                    long mHargaAyam = dataSnapshot.child("harga_pasar").getValue(Long.class);
+
+                    hitungPredikisi(mAyamHidup , mAyamMati, mHargaAyam);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void hitungPredikisi(long ayamHidup, long ayamMati, long mHargaAyam){
+        long jumlahAyam = ayamHidup - ayamMati;
+        Log.i(TAG, "hitungPredikisi [JUMLAH AYAM] : " + jumlahAyam);
+
+        prediksiRansum1 = jumlahAyam * 114;
+        prediksiRansum2 = jumlahAyam * 289;
+        prediksiRansum3 = jumlahAyam * 512;
+        prediksiRansum4 = jumlahAyam * 715;
+        prediksiRansum5 = jumlahAyam * 930;
+
+        prediksiPanen1 = jumlahAyam * 173 * mHargaAyam;
+        prediksiPanen2 = jumlahAyam * 429 * mHargaAyam;
+        prediksiPanen3 = jumlahAyam * 823 * mHargaAyam;
+        prediksiPanen4 = jumlahAyam * 1334 * mHargaAyam;
+        prediksiPanen5 = jumlahAyam * 1919 * mHargaAyam;
+
+        ransum1.setText(String.valueOf(prediksiRansum1));
+        ransum2.setText(String.valueOf(prediksiRansum2));
+        ransum3.setText(String.valueOf(prediksiRansum3));
+        ransum4.setText(String.valueOf(prediksiRansum4));
+        ransum5.setText(String.valueOf(prediksiRansum5));
+
+        panen1.setText(String .valueOf(prediksiPanen1));
+        panen2.setText(String .valueOf(prediksiPanen2));
+        panen3.setText(String .valueOf(prediksiPanen3));
+        panen4.setText(String .valueOf(prediksiPanen4));
+        panen5.setText(String .valueOf(prediksiPanen5));
+    }
+
     private void DataKandang() {
         final ArrayList<Long> tanggalKandang = new ArrayList<>();
-        DatabaseReference curData = dataRef.child("MainProgram").child("Periode");
+        DatabaseReference curData = dataRef.child(idDevice).child("Periode");
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -167,7 +195,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
                 int monthNumber = Integer.parseInt(unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[1]);
 
                 String mDayString = bulan[monthNumber - 1];
-                dateToTitle = mTanggal_datang + ", " + mDayString + " " + mTahun_datang;
+                dateToTitle = mTanggal_datang + " " + mDayString + " " + mTahun_datang;
                 Log.d("Hasil", "" + dateToTitle);
                 tanggalperiode.setText(dateToTitle);
             }
@@ -247,7 +275,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         myRef.keepSynced(true);
 
         Log.i(TAG, "readSuhu: " + mKey);
-        myRef.child("MainProgram").child("Periode").child(mKey).child("Suhu").child(simpleDateFormat()).addValueEventListener(new ValueEventListener() {
+        myRef.child(idDevice).child("Periode").child(mKey).child("Suhu").child(simpleDateFormat()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mValuesSuhu.clear();

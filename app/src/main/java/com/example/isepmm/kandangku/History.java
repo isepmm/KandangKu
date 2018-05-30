@@ -24,6 +24,7 @@ public class History extends AppCompatActivity {
     private String mKey;
     private ListView listHistory;
     private MatiAdapter mAdapter;
+    private String idDevice;
     ArrayList<Mati> list;
 
 
@@ -40,6 +41,9 @@ public class History extends AppCompatActivity {
         listHistory = (ListView) findViewById(R.id.viewhistory);
         tanggalsekarang = (TextView) findViewById(R.id.tanggal_datang);
         ayammati = (TextView) findViewById(R.id.ayam_mati);
+
+        idDevice = getIntent().getStringExtra("idDevice");
+
         getDataHistory();
 
         //ArrayList
@@ -49,7 +53,7 @@ public class History extends AppCompatActivity {
     }
     //Read History
     private void getDataHistory() {
-        mDatabaseReference.child("MainProgram").child("Periode").child(mKey).child("Ayam_Mati")
+        mDatabaseReference.child(idDevice).child("Periode").child(mKey).child("Ayam_Mati")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

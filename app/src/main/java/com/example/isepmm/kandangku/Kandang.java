@@ -21,7 +21,7 @@ public class Kandang {
     private long konsumsi_pakan;
     private long konsumsi_vitamin;
     private long penggunaan_listrik;
-    private long Total_Ayam_Mati;
+    private long total_ayam_mati;
 
     public Kandang(){
 
@@ -40,7 +40,7 @@ public class Kandang {
         this.penggunaan_listrik = penggunaan_listrik;
     }
 
-    public Kandang(long tanggal_datang, long jumlah_ayam, long harga_doc, long berat_panen, long boarding, long harga_pasar, long konsumsi_minum, long konsumsi_obat, long konsumsi_pakan, long konsumsi_vitamin, long penggunaan_listrik, long Total_Ayam_Mati) {
+    public Kandang(long tanggal_datang, long jumlah_ayam, long harga_doc, long berat_panen, long boarding, long harga_pasar, long konsumsi_minum, long konsumsi_obat, long konsumsi_pakan, long konsumsi_vitamin, long penggunaan_listrik, long total_ayam_mati) {
         this.tanggal_datang = tanggal_datang;
         this.jumlah_ayam = jumlah_ayam;
         this.harga_doc = harga_doc;
@@ -52,7 +52,7 @@ public class Kandang {
         this.konsumsi_pakan = konsumsi_pakan;
         this.konsumsi_vitamin = konsumsi_vitamin;
         this.penggunaan_listrik = penggunaan_listrik;
-        this.Total_Ayam_Mati = Total_Ayam_Mati;
+        this.total_ayam_mati = total_ayam_mati;
     }
 
     public long getTanggal_datang() {
@@ -100,7 +100,7 @@ public class Kandang {
     }
 
     public long getTotal_Ayam_Mati() {
-        return Total_Ayam_Mati;
+        return total_ayam_mati;
     }
 
     @Exclude

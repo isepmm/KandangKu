@@ -1,7 +1,9 @@
 package com.example.isepmm.kandangku;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +27,10 @@ import java.util.Date;
 
 public class ViewDetailTernak extends AppCompatActivity {
 
-    DatabaseReference periodeTernak;
+    private DatabaseReference periodeTernak;
+    private DatabaseReference mDatabaseReference;
+    private String lastKey;
+    private String idDevice;
 
     TextView tanggal_datang;
     TextView jumlah_total_doc;
@@ -38,7 +44,7 @@ public class ViewDetailTernak extends AppCompatActivity {
     TextView konsumsi_vitamin;
     TextView penggunaan_listrik;
     TextView total_jumlah_ayam_mati;
-    String lastKey;
+
     //Long mtanggalDatang;
 
     @Override
@@ -59,21 +65,16 @@ public class ViewDetailTernak extends AppCompatActivity {
         penggunaan_listrik = (TextView) findViewById(R.id.penggunaan_listrik);
         total_jumlah_ayam_mati = (TextView) findViewById(R.id.total_jumlah_ayam_mati);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tambah_ayam_mati);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewDetailTernak.this, FormAyamMati.class);
-                intent.putExtra("KeyValue", lastKey);
-                startActivity(intent);
-//                Toast.makeText(ViewDetailTernak.this, "UnderMaintenance!", Toast.LENGTH_LONG).show();
-            }
-        });
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        idDevice = this.getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
+        Log.i("Coba", "onCreate: " + idDevice);
         //Read Key
+//        ReadLaskey();
         lastKey = getIntent().getStringExtra("KeyValue");
         //Chlid Firebase
         periodeTernak = FirebaseDatabase.getInstance().getReference()
-                .child("MainProgram").child("Periode").child(lastKey);
+                .child(idDevice).child("Periode").child(lastKey);
         //Raed data Dari Firebase
         periodeTernak.addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,7 +106,31 @@ public class ViewDetailTernak extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.tambah_ayam_mati);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewDetailTernak.this, FormAyamMati.class);
+                intent.putExtra("KeyValue", lastKey);
+                intent.putExtra("idDevice", idDevice);
+                startActivity(intent);
+//                Toast.makeText(ViewDetailTernak.this, "UnderMaintenance!", Toast.LENGTH_LONG).show();
+            }
+        });
         setTitle("Detail Ternak");
+    }
+    private void ReadLaskey() {
+        mDatabaseReference.child(idDevice).child("LastKey").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lastKey = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private String unixTimestimeToString(long unixTimestime) {
@@ -114,8 +139,27 @@ public class ViewDetailTernak extends AppCompatActivity {
         String formattedDate = sdf.format(date);
         return formattedDate;
     }
+    private void hapus() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_dialog)
+                .setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        periodeTernak.removeValue();
+                        Toast.makeText(ViewDetailTernak.this, R.string.click_delete, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.action_no_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create().show();
+    }
 
-    @Override
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.tools_detail, menu);
@@ -128,14 +172,18 @@ public class ViewDetailTernak extends AppCompatActivity {
             case R.id.action_history:
                 Intent history = new Intent(ViewDetailTernak.this, History.class);
                 history.putExtra("KeyValue", lastKey);
+                history.putExtra("idDevice", idDevice);
                 startActivity(history);
-                //Toast.makeText(ViewDetailTernak.this, "Fitur masih dalam pengembangan", Toast.LENGTH_LONG).show();
-
                 return true;
             case R.id.edit:
                 Intent edit = new Intent(ViewDetailTernak.this, EditKandang.class);
                 edit.putExtra("KeyValue", lastKey);
+                String id = idDevice;
+                edit.putExtra(MainActivity.ARGS_DEVICE_ID, id);
                 startActivity(edit);
+                return true;
+            case R.id.action_hapus:
+                hapus();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -145,4 +193,5 @@ public class ViewDetailTernak extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

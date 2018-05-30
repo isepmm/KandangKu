@@ -159,6 +159,7 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
         }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
+                finish();
             }
         });
 

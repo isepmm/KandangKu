@@ -24,6 +24,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
     DatabaseReference dataTerendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
     DatabaseReference dataOnCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOn");
     DatabaseReference dataOffCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOff");
+    DatabaseReference dataAmoniaSekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("AmoniaSekarang");
 
     TextView suhuSekarang;
     TextView kelembabanSekarang;
@@ -33,6 +34,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
     EditText suhuTerendah;
     EditText onCooling;
     EditText offCooling;
+    TextView amoniasekarang;
     Button ubah;
 
     @Override
@@ -47,13 +49,14 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         suhuTerendah = (EditText) view.findViewById(R.id.suhuterendah);
         onCooling = (EditText) view.findViewById(R.id.onCoolling);
         offCooling = (EditText) view.findViewById(R.id.offCooling);
+        amoniasekarang = (TextView) view.findViewById(R.id.amonia);
         ubah = (Button) view.findViewById(R.id.ubah);
 
         //Read Data Suhu Sekarang
         dataSekarang.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int suhuSekarang = dataSnapshot.getValue(Integer.class);
                     FragmentRemote.this.suhuSekarang.setText(String.valueOf(suhuSekarang));
                 }
@@ -67,7 +70,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         dataKelembaban.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int tinggi = dataSnapshot.getValue(Integer.class);
                     kelembabanSekarang.setText(String.valueOf(tinggi));
                 }
@@ -82,7 +85,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         dataTertinggi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int tinggi = dataSnapshot.getValue(Integer.class);
                     suhuTertinggi.setText(String.valueOf(tinggi));
                     suhuTertinggiView.setText(String.valueOf(tinggi));
@@ -98,7 +101,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         dataTerendah.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int rendah = dataSnapshot.getValue(Integer.class);
                     suhuTerendah.setText(String.valueOf(rendah));
                     suhuTerendah.setText(String.valueOf(rendah));
@@ -115,7 +118,7 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         dataOnCooling.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int on = dataSnapshot.getValue(Integer.class);
                     onCooling.setText(String.valueOf(on));
                 }
@@ -130,9 +133,24 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
         dataOffCooling.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(float.class) != null) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
                     int off = dataSnapshot.getValue(Integer.class);
                     offCooling.setText(String.valueOf(off));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //Read Data amonia
+        dataAmoniaSekarang.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(float.class) != null) {
+                    float amonia = dataSnapshot.getValue(float.class);
+                    amoniasekarang.setText(String.valueOf(amonia));
                 }
             }
 
