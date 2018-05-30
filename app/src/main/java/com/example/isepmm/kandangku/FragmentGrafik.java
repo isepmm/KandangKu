@@ -1,5 +1,6 @@
 package com.example.isepmm.kandangku;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.graphics.DashPathEffect;
 import android.support.v4.content.res.ResourcesCompat;

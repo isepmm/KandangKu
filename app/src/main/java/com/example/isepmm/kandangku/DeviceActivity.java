@@ -1,6 +1,7 @@
 package com.example.isepmm.kandangku;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,14 +43,6 @@ import static android.content.ContentValues.TAG;
 import static java.security.AccessController.getContext;
 
 public class DeviceActivity extends AppCompatActivity {
-    private String idDevice;
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference uidUser = FirebaseDatabase.getInstance().getInstance().getReference().child("User");
-    DatabaseReference deviceId = FirebaseDatabase.getInstance().getInstance().getReference().child("User").child(firebaseUser.getUid());
-
-
-    private ArrayList<Device> arrayDevices= new ArrayList<>();
-
     private ListView listDevice;
     private TextView emptyView;
     private FloatingActionButton addDevice;
@@ -101,6 +94,15 @@ public class DeviceActivity extends AppCompatActivity {
             }
         });
         setTitle("Kandangku");
+        saveToken();
+    }
+
+    public void saveToken(){
+        PrefManager prefManager = new PrefManager(DeviceActivity.this);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mDatabaseReference.child("Token").setValue(prefManager.getToken());
+        Log.i(TAG, "saveToken: "+prefManager.getToken());
     }
 
     public ArrayList<Device> getData(){
@@ -118,7 +120,7 @@ public class DeviceActivity extends AppCompatActivity {
                         Device device = data.getValue(Device.class);
                         Device curDevice = new Device(device,data.getKey());
                         curData.add(curDevice);
-                        idDevice = data.getKey();
+//                        String idDevice = data.getKey();
                     }
                 }
                 loadingData.setVisibility(View.GONE);
