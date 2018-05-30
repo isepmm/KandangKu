@@ -14,14 +14,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +41,7 @@ import static android.Manifest.permission.CAMERA;
 public class ReaderActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     public static final int REQUEST_CAMERA = 1;
     public ZXingScannerView scannerView;
+    private boolean cek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,51 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
     public void handleResult(Result result) {
         final String idDevice = result.getText();
 
+        readDeviceData(idDevice);
+    }
+
+    private void readDeviceData(final String deviceID) {
+        FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference();
+        myRef.keepSynced(true);
+        myRef.child("User").child(mCurrentUser.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String idBarcode = dataSnapshot.getKey();
+                Log.i("IDDEVICE", "onChildAdded: "+idBarcode);
+                if (idBarcode.equals(deviceID)){
+                    finish();
+                    Toast.makeText(ReaderActivity.this, "ID Device sudah ada!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    showDialog(deviceID);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void showDialog(final String idDevice){
         AlertDialog.Builder builder = new AlertDialog.Builder(ReaderActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View viewDialog = inflater.inflate(R.layout.form_device_name, null);
