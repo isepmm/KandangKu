@@ -1,17 +1,27 @@
 package com.example.isepmm.kandangku;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -21,6 +31,7 @@ import java.util.Date;
 public class MatiAdapter extends ArrayAdapter<Mati> {
     private TextView ayammati;
     private TextView tanggalsekarang;
+    private LinearLayout onClick;
 
     private String bulan[] = {"Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"};
 
@@ -37,11 +48,10 @@ public class MatiAdapter extends ArrayAdapter<Mati> {
         }
 
         Mati current = getItem(position);
-
         ayammati = (TextView) convertView.findViewById(R.id.ayam_mati);
         tanggalsekarang = (TextView) convertView.findViewById(R.id.tanggal_datang);
 
-        Mati mati = getItem(position);
+        final Mati mati = getItem(position);
         long jumlah = mati.getJumlah_ayam_mati();
         long tanggal = mati.getTanggal_sekarang();
 
@@ -58,6 +68,7 @@ public class MatiAdapter extends ArrayAdapter<Mati> {
 
         return convertView;
     }
+
     private String[] unixTimestimeToString(long unixTimestime){
         Date date = new Date(unixTimestime*1000L);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd HH mm ss");
@@ -66,4 +77,5 @@ public class MatiAdapter extends ArrayAdapter<Mati> {
         String[] time = formattedDate.split(" ");
         return time;
     }
+
 }

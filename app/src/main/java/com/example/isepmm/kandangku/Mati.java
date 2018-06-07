@@ -1,5 +1,10 @@
 package com.example.isepmm.kandangku;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Isepmm on 24/05/2018.
  */
@@ -34,5 +39,13 @@ public class Mati {
 
     public long getJumlah_ayam_mati() {
         return jumlah_ayam_mati;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("jumlah_ayam_mati", jumlah_ayam_mati);
+        result.put("tanggal_sekarang", tanggal_sekarang);
+        return result;
     }
 }

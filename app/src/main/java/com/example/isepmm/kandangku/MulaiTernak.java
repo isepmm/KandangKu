@@ -91,7 +91,7 @@ public class MulaiTernak extends AppCompatActivity {
                 Calendar c = Calendar.getInstance();
                 c.set(selectedyear, selectedmonth, selectedday);
                 Date date = c.getTime();
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                 editText.setText(format.format(date));
             }
         }, mYear, mMonth, mDay);
@@ -101,7 +101,7 @@ public class MulaiTernak extends AppCompatActivity {
 
     private long changeStringToUnixTimestamp(String textDate){
         Date date = null;
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         try {
             date = (Date)formatter.parse(textDate);
         } catch (ParseException e) {
