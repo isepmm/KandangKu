@@ -32,6 +32,7 @@ public class FormAyamMati extends AppCompatActivity {
     private EditText tanggalsekarang;
     private Button simpan;
     private String idDevice;
+    private long jumlahayam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,17 @@ public class FormAyamMati extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         tanggalsekarang.setKeyListener(null);
 
+        mDatabaseReference.child(idDevice).child("Periode").child(mKey).child("jumlah_ayam").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                jumlahayam = (long) dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         tanggalsekarang.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -112,6 +124,9 @@ public class FormAyamMati extends AppCompatActivity {
             isValid = false;
         }else if (tanggalsekarang.getText().toString().equals("")) {
             Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show();
+            isValid = false;
+        } else if (jumlahayam < Integer.parseInt(ayammati.getText().toString())) {
+            Toast.makeText(this, "Ayam Mati Terlalu Banyak", Toast.LENGTH_LONG).show();
             isValid = false;
         }
         return isValid;

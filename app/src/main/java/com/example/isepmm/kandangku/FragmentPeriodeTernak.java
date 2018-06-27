@@ -100,6 +100,11 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment {
                 }
                 loadingData.setVisibility(View.GONE);
                 mAdapter.notifyDataSetChanged();
+
+                if (myKey.size() > 0) {
+                    String lastKey = myKey.get(myKey.size() - 1);
+                    FirebaseDatabase.getInstance().getReference().child(idDevice).child("LastKey").setValue(lastKey);
+                }
             }
 
             @Override

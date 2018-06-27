@@ -140,11 +140,13 @@ public class EditKandang extends AppCompatActivity {
                     }
                 }
             });
-                Intent intent = new Intent(this,ViewDetailTernak.class);
-                String id = idDevice;
-                intent.putExtra(MainActivity.ARGS_DEVICE_ID, id);
-                intent.putExtra("KeyValue", lastKey);
-                startActivity(intent);
+//                Intent intent = new Intent(this,ViewDetailTernak.class);
+//                String id = idDevice;
+//                intent.putExtra(MainActivity.ARGS_DEVICE_ID, id);
+//                intent.putExtra("KeyValue", lastKey);
+//                startActivity(intent);
+//                return true;
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

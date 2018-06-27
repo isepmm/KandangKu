@@ -19,17 +19,17 @@ import com.google.firebase.database.ValueEventListener;
 public class FragmentRemote extends android.support.v4.app.Fragment {
     private String idDevice;
     //Chlid Firebase
-    DatabaseReference suhu1 = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("Suhu1");
-    DatabaseReference suhu2 = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("Suhu2");
-    DatabaseReference suhu3 = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("Suhu3");
+    DatabaseReference suhu1;
+    DatabaseReference suhu2;
+    DatabaseReference suhu3;
 
-    DatabaseReference rataSuhu = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("RataSuhu");
-    DatabaseReference dataKelembaban = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("KelembabanSekarang");
-    DatabaseReference dataTertinggi = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTertinggi");
-    DatabaseReference dataTerendah = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("SuhuTerendah");
-    //DatabaseReference dataOnCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOn");
-    //DatabaseReference dataOffCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOff");
-    DatabaseReference dataAmoniaSekarang = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("AmoniaSekarang");
+    DatabaseReference rataSuhu;
+    DatabaseReference dataKelembaban;
+    DatabaseReference dataTertinggi;
+    DatabaseReference dataTerendah;
+    //DatabaseReference dataOnCooling;
+    //DatabaseReference dataOffCooling;
+    DatabaseReference dataAmoniaSekarang;
 
     TextView rataRataSuhu;
     TextView kelembabanSekarang;
@@ -49,6 +49,17 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
 
         idDevice = getActivity().getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
 
+        suhu1 = FirebaseDatabase.getInstance().getReference().child(idDevice).child("Suhu1");
+        suhu2 = FirebaseDatabase.getInstance().getReference().child(idDevice).child("Suhu2");
+        suhu3 = FirebaseDatabase.getInstance().getReference().child(idDevice).child("Suhu3");
+        rataSuhu = FirebaseDatabase.getInstance().getReference().child(idDevice).child("RataSuhu");
+        dataKelembaban = FirebaseDatabase.getInstance().getReference().child(idDevice).child("KelembabanSekarang");
+        dataTertinggi = FirebaseDatabase.getInstance().getReference().child(idDevice).child("SuhuTertinggi");
+        dataTerendah = FirebaseDatabase.getInstance().getReference().child(idDevice).child("SuhuTerendah");
+//        dataOnCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOn");
+//        dataOffCooling = FirebaseDatabase.getInstance().getReference().child("MainProgram").child("CoolingOff");
+        dataAmoniaSekarang = FirebaseDatabase.getInstance().getReference().child(idDevice).child("AmoniaSekarang");
+
         rataRataSuhu = (TextView) view.findViewById(R.id.rataSuhu);
         kelembabanSekarang = (TextView) view.findViewById(R.id.kelembaban);
         suhuBlok1 = (TextView) view.findViewById(R.id.suhu1);
@@ -67,6 +78,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int suhu1 = dataSnapshot.getValue(Integer.class);
                     suhuBlok1.setText(String.valueOf(suhu1));
+                } else {
+                    suhuBlok1.setText("-");
                 }
             }
 
@@ -82,6 +95,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int suhu2 = dataSnapshot.getValue(Integer.class);
                     suhuBlok2.setText(String.valueOf(suhu2));
+                } else {
+                    suhuBlok2.setText("-");
                 }
             }
 
@@ -97,6 +112,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int suhu3 = dataSnapshot.getValue(Integer.class);
                     suhuBlok3.setText(String.valueOf(suhu3));
+                } else {
+                    suhuBlok3.setText("-");
                 }
             }
 
@@ -115,6 +132,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int rataRata = dataSnapshot.getValue(Integer.class);
                     FragmentRemote.this.rataRataSuhu.setText(String.valueOf(rataRata));
+                } else {
+                    FragmentRemote.this.rataRataSuhu.setText("-");
                 }
             }
 
@@ -129,6 +148,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int kelembaban = dataSnapshot.getValue(Integer.class);
                     kelembabanSekarang.setText(String.valueOf(kelembaban));
+                } else {
+                    kelembabanSekarang.setText("-");
                 }
             }
 
@@ -144,6 +165,10 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int tinggi = dataSnapshot.getValue(Integer.class);
                     suhuTertinggi.setText(String.valueOf(tinggi));
+                } else {
+                    ubah.setVisibility(View.GONE);
+                    suhuTertinggi.setText("-");
+                    suhuTertinggi.setEnabled(false);
                 }
             }
 
@@ -159,6 +184,10 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(Integer.class) != null) {
                     int rendah = dataSnapshot.getValue(Integer.class);
                     suhuTerendah.setText(String.valueOf(rendah));
+                } else {
+                    ubah.setVisibility(View.GONE);
+                    suhuTerendah.setText("-");
+                    suhuTerendah.setEnabled(false);
                 }
             }
 
@@ -204,6 +233,8 @@ public class FragmentRemote extends android.support.v4.app.Fragment {
                 if (dataSnapshot.getValue(float.class) != null) {
                     float amonia = dataSnapshot.getValue(float.class);
                     amoniasekarang.setText(String.valueOf(amonia));
+                } else {
+                    amoniasekarang.setText("-");
                 }
             }
 

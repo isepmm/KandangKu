@@ -99,7 +99,7 @@ public class Kandang {
         return penggunaan_listrik;
     }
 
-    public long getTotal_Ayam_Mati() {
+    public long getTotal_ayam_mati() {
         return total_ayam_mati;
     }
 

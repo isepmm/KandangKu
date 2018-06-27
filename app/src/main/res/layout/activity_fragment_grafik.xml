@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 1 : "
                         android:textColor="@color/hitam"/>
 
@@ -97,8 +97,8 @@
                         android:id="@+id/ransum1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1000"
+                        android:gravity="left"
+                        android:text="-"
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
@@ -132,7 +132,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 2 : "
                         android:textColor="@color/hitam" />
 
@@ -147,8 +147,8 @@
                         android:id="@+id/ransum2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1000"
+                        android:gravity="left"
+                        android:text="-"
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
@@ -182,7 +182,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 3 : "
                         android:textColor="@color/hitam" />
 
@@ -197,8 +197,8 @@
                         android:id="@+id/ransum3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1000"
+                        android:gravity="left"
+                        android:text="-"
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
@@ -232,7 +232,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 4 : "
                         android:textColor="@color/hitam" />
 
@@ -247,8 +247,8 @@
                         android:id="@+id/ransum4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1000"
+                        android:gravity="left"
+                        android:text="-"
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
@@ -283,7 +283,7 @@
                         android:id="@+id/textView7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 5 : "
                         android:textColor="@color/hitam" />
 
@@ -298,8 +298,8 @@
                         android:id="@+id/ransum5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="1000"
+                        android:gravity="left"
+                        android:text="-"
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
@@ -350,37 +350,37 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 1 : "
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:weightSum="1">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:text="Rp."
-                        android:textColor="@color/hitam" />
+                        android:textColor="@color/hitam"
+                        android:layout_weight="0.48" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/panen1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="10000"
+                        android:text="-"
                         android:textColor="@color/hitam" />
                 </LinearLayout>
 
@@ -400,21 +400,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 2 : "
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:text="Rp."
                         android:textColor="@color/hitam" />
 
@@ -423,14 +421,14 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/panen2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="10000"
+                        android:text="-"
                         android:textColor="@color/hitam" />
                 </LinearLayout>
 
@@ -450,21 +448,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 3 : "
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:text="Rp."
                         android:textColor="@color/hitam" />
 
@@ -473,14 +469,14 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/panen3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="10000"
+                        android:text="-"
                         android:textColor="@color/hitam" />
                 </LinearLayout>
 
@@ -500,21 +496,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 4 : "
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:text="Rp."
                         android:textColor="@color/hitam" />
 
@@ -523,14 +517,14 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/panen4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="10000"
+                        android:text="-"
                         android:textColor="@color/hitam" />
                 </LinearLayout>
 
@@ -550,21 +544,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="left"
                         android:text="Minggu ke 5 : "
                         android:textColor="@color/hitam" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
                         android:text="Rp."
                         android:textColor="@color/hitam" />
 
@@ -573,14 +565,14 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:id="@+id/panen5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="10000"
+                        android:text="-"
                         android:textColor="@color/hitam" />
                 </LinearLayout>
 

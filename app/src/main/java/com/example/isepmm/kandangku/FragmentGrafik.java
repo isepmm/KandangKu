@@ -132,11 +132,11 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    /*long mAyamHidup = dataSnapshot.child("jumlah_ayam").getValue(Long.class);
+                    long mAyamHidup = dataSnapshot.child("jumlah_ayam").getValue(Long.class);
                     long mAyamMati = dataSnapshot.child("total_ayam_mati").getValue(Long.class);
                     long mHargaAyam = dataSnapshot.child("harga_pasar").getValue(Long.class);
 
-                    hitungPredikisi(mAyamHidup , mAyamMati, mHargaAyam);*/
+                    hitungPredikisi(mAyamHidup , mAyamMati, mHargaAyam);
                 }
             }
 
@@ -191,12 +191,17 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
                         Log.d("Cek", "cek");
                     }
                 }
-                String mTahun_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[0];
-                String mTanggal_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[2];
-                int monthNumber = Integer.parseInt(unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[1]);
 
-                String mDayString = bulan[monthNumber - 1];
-                dateToTitle = mTanggal_datang + " " + mDayString + " " + mTahun_datang;
+                if (!tanggalKandang.isEmpty()) {
+                    String mTahun_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[0];
+                    String mTanggal_datang = unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[2];
+                    int monthNumber = Integer.parseInt(unixTimestimeToString(tanggalKandang.get(tanggalKandang.size() - 1))[1]);
+
+                    String mDayString = bulan[monthNumber - 1];
+                    dateToTitle = mTanggal_datang + " " + mDayString + " " + mTahun_datang;
+                } else {
+                    dateToTitle = "-";
+                }
                 Log.d("Hasil", "" + dateToTitle);
                 tanggalperiode.setText(dateToTitle);
             }
@@ -308,13 +313,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
     }
 
     private void setData() {
-        if (mChart.getData() != null && mChart.getData().getDataSetCount() > 0) {
-            mSetSuhu = (LineDataSet) mChart.getData().getDataSetByIndex(0);
-            mSetSuhu.setValues(mValuesSuhu);
-            mChart.getData().notifyDataChanged();
-            mChart.notifyDataSetChanged();
-        } else {
-            // create a dataset and give it a type
+        if (mChart.getData() == null || mChart.getData().getDataSetCount() > 0) {
             mSetSuhu = new LineDataSet(mValuesSuhu, "Suhu");
 
             mSetSuhu.setDrawIcons(false);
@@ -333,12 +332,16 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             mSetSuhu.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
             mSetSuhu.setFormSize(15.f);
             mSetSuhu.setFillColor(color1);
+        }
 
+        if (mValuesSuhu != null && !mValuesSuhu.isEmpty()) {
             ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
             dataSets.add(mSetSuhu);
 
             LineData data = new LineData(dataSets);
             mChart.setData(data);
+            mChart.getData().notifyDataChanged();
+            mChart.notifyDataSetChanged();
         }
     }
 

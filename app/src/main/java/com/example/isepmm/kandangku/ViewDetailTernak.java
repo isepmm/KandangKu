@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class ViewDetailTernak extends AppCompatActivity {
@@ -81,7 +79,7 @@ public class ViewDetailTernak extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(Kandang.class) != null) {
                     Kandang kandang = dataSnapshot.getValue(Kandang.class);
-                     Log.d("isepp", "" + kandang.getTotal_Ayam_Mati());
+                     Log.d("isepp", "" + kandang.getTotal_ayam_mati());
 
                     long mtgl = kandang.getTanggal_datang();
                     String textTgl = unixTimestimeToString(mtgl);
@@ -97,7 +95,7 @@ public class ViewDetailTernak extends AppCompatActivity {
                     konsumsi_vitamin.setText(String.valueOf(kandang.getKonsumsi_vitamin()));
                     konsumsi_obat.setText(String.valueOf(kandang.getKonsumsi_obat()));
                     penggunaan_listrik.setText(String.valueOf(kandang.getPenggunaan_listrik()));
-                    total_jumlah_ayam_mati.setText(String.valueOf(kandang.getTotal_Ayam_Mati()));
+                    total_jumlah_ayam_mati.setText(String.valueOf(kandang.getTotal_ayam_mati()));
                 }
             }
 
@@ -114,7 +112,6 @@ public class ViewDetailTernak extends AppCompatActivity {
                 intent.putExtra("KeyValue", lastKey);
                 intent.putExtra("idDevice", idDevice);
                 startActivity(intent);
-//                Toast.makeText(ViewDetailTernak.this, "UnderMaintenance!", Toast.LENGTH_LONG).show();
             }
         });
         setTitle("Detail Ternak");
@@ -134,8 +131,6 @@ public class ViewDetailTernak extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         periodeTernak.removeValue();
                         Toast.makeText(ViewDetailTernak.this, R.string.click_delete, Toast.LENGTH_SHORT).show();
-                        /*Intent hapus = new Intent(ViewDetailTernak.this, MainActivity.class);
-                        startActivity(hapus);*/
                         finish();
                     }
                 })
