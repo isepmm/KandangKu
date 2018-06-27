@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class History extends AppCompatActivity {
 
     TextView tanggalsekarang;
     TextView ayammati;
+    TextView empty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class History extends AppCompatActivity {
         listHistory = (ListView) findViewById(R.id.viewhistory);
         tanggalsekarang = (TextView) findViewById(R.id.tanggal_datang);
         ayammati = (TextView) findViewById(R.id.ayam_mati);
+        empty = (TextView) findViewById(R.id.empty_view);
 
         idDevice = getIntent().getStringExtra("idDevice");
 
@@ -122,6 +125,7 @@ public class History extends AppCompatActivity {
                             Mati mati = data.getValue(Mati.class);
                             Mati AyamMati = new Mati(mati, data.getKey());
                             list.add(AyamMati);
+                            empty.setVisibility(View.GONE);
                             Log.i("AyamMati", "onDataChange: " + mati);
                         }
                         mAdapter.notifyDataSetChanged();

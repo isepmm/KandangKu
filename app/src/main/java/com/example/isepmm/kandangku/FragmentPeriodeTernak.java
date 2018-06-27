@@ -11,33 +11,38 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
-public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
+public class FragmentPeriodeTernak extends android.support.v4.app.Fragment {
     private String idDevice;
     private ProgressBar loadingData;
     private ListView listTanggal;
     private PeriodeAdapter mAdapter;
     private ArrayList<String> myKey = new ArrayList<>();
+    private ArrayList<Kandang> dataKandang = new ArrayList<>();
     private Long tgl;
 
+    TextView empty;
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_periode_ternak, container, false);
-
         idDevice = getActivity().getIntent().getStringExtra(MainActivity.ARGS_DEVICE_ID);
 
         listTanggal = (ListView) view.findViewById(R.id.recyclerview);
-        mAdapter = new PeriodeAdapter(getContext(),getDataKandang());
+        empty = (TextView) view.findViewById(R.id.empty_view);
+        mAdapter = new PeriodeAdapter(getContext(), dataKandang);
         loadingData = (ProgressBar) view.findViewById(R.id.loading_data);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.tambah);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,74 +54,57 @@ public class FragmentPeriodeTernak extends android.support.v4.app.Fragment{
                 startActivity(intent);
             }
         });
-        if(mAdapter != null){
+
+        if (mAdapter != null) {
             listTanggal.setAdapter(mAdapter);
             ListOnClick(listTanggal);
             loadingData.setVisibility(View.GONE);
-        }else{
-            Log.d("Uji","baca");
+        } else {
+            Log.d("Uji", "baca");
             loadingData.setVisibility(View.GONE);
         }
+        getDataKandang();
+
 
         //listTanggal.setEmptyView();
         return view;
     }
 
-    private void ListOnClick(ListView list){
+    private void ListOnClick(ListView list) {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent newIntent = new Intent(getContext(),ViewDetailTernak.class);
-                newIntent.putExtra("KeyValue",myKey.get(i));
-                Log.i(TAG, "IDLASTKEY : "+myKey.get(i));
-                newIntent.putExtra("tgl",tgl.toString());
+                Intent newIntent = new Intent(getContext(), ViewDetailTernak.class);
+                newIntent.putExtra("KeyValue", myKey.get(i));
+                Log.i(TAG, "IDLASTKEY : " + myKey.get(i));
                 newIntent.putExtra(MainActivity.ARGS_DEVICE_ID, idDevice);
                 startActivity(newIntent);
             }
         });
     }
 
-    private ArrayList<Kandang> getDataKandang(){
-        final ArrayList<Kandang> curKandang = new ArrayList<>();
+    private void getDataKandang(){
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child(idDevice).child("Periode");
-        dataRef.addChildEventListener(new ChildEventListener() {
+        dataRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 loadingData.setVisibility(View.VISIBLE);
-                Kandang kandang = dataSnapshot.getValue(Kandang.class);
-                tgl = kandang.getTanggal_datang();
-                Log.i("Data ternak", " : " + tgl);
-                myKey.add(dataSnapshot.getKey());
-                if(kandang != null){
-                    curKandang.add(kandang);
-
+                empty.setVisibility(View.VISIBLE);
+                mAdapter.clear();
+                dataKandang.clear();
+                myKey.clear();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    myKey.add(data.getKey());
+                    dataKandang.add(data.getValue(Kandang.class));
+                    empty.setVisibility(View.GONE);
                 }
                 loadingData.setVisibility(View.GONE);
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
-        return curKandang;
     }
-
 }

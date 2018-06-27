@@ -132,11 +132,11 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    long mAyamHidup = dataSnapshot.child("jumlah_ayam").getValue(Long.class);
+                    /*long mAyamHidup = dataSnapshot.child("jumlah_ayam").getValue(Long.class);
                     long mAyamMati = dataSnapshot.child("total_ayam_mati").getValue(Long.class);
                     long mHargaAyam = dataSnapshot.child("harga_pasar").getValue(Long.class);
 
-                    hitungPredikisi(mAyamHidup , mAyamMati, mHargaAyam);
+                    hitungPredikisi(mAyamHidup , mAyamMati, mHargaAyam);*/
                 }
             }
 

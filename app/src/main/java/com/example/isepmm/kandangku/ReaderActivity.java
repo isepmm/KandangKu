@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -42,6 +43,7 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
     public static final int REQUEST_CAMERA = 1;
     public ZXingScannerView scannerView;
     private boolean cek;
+    private ArrayList<String> listIdDevidce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,13 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
                 requestPermission();
             }
         }
-
+        listIdDevidce = new ArrayList<>();
+        readAllId();
     }
 
     /**
      * checking for camera permission
+     *
      * @return is camera granted
      */
     private boolean checkPermission() {
@@ -75,8 +79,9 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
 
     /**
      * result of request permission
-     * @param requestCode request code
-     * @param permission permission
+     *
+     * @param requestCode  request code
+     * @param permission   permission
      * @param grantResults grant result
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -93,7 +98,8 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                                    requestPermission(new String[]{CAMERA}, REQUEST_CAMERA);}
+                                                    requestPermission(new String[]{CAMERA}, REQUEST_CAMERA);
+                                                }
                                             }
 
                                             private void requestPermission(String[] strings, int requestCamera) {
@@ -132,6 +138,7 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
 
     /**
      * showing alert message
+     *
      * @param listener listen for action click
      */
     public void displayAlertMessage(DialogInterface.OnClickListener listener) {
@@ -142,6 +149,7 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
                 .create()
                 .show();
     }
+
     @Override
     public void handleResult(Result result) {
         final String idDevice = result.getText();
@@ -158,12 +166,14 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String idBarcode = dataSnapshot.getKey();
-                Log.i("IDDEVICE", "onChildAdded: "+idBarcode);
-                if (idBarcode.equals(deviceID)){
+                Log.i("IDDEVICE", "onChildAdded: " + idBarcode);
+                if (idBarcode.equals(deviceID)) {
+                    Toast.makeText(ReaderActivity.this, "ID Device Sudah Ada!", Toast.LENGTH_SHORT).show();
                     finish();
-                    Toast.makeText(ReaderActivity.this, "ID Device sudah ada!", Toast.LENGTH_SHORT).show();
+                } else if (!listIdDevidce.contains(deviceID)) {
+                    Toast.makeText(ReaderActivity.this, "Id Tidak Terdaftar", Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
+                }else {
                     showDialog(deviceID);
                 }
             }
@@ -190,7 +200,7 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
         });
     }
 
-    public void showDialog(final String idDevice){
+    public void showDialog(final String idDevice) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ReaderActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View viewDialog = inflater.inflate(R.layout.form_device_name, null);
@@ -201,8 +211,13 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
             public void onClick(DialogInterface dialogInterface, int id) {
                 String deviceName = editTextName.getText().toString().trim();
 
-                saveToDatabase(idDevice, deviceName);
-                goToDeviceActivity(idDevice);
+                if (deviceName.equals("")) {
+                    Toast.makeText(ReaderActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }else {
+                    saveToDatabase(idDevice, deviceName);
+                    Toast.makeText(ReaderActivity.this, "Data Berhasil Disimpan", Toast.LENGTH_LONG).show();
+                    goToDeviceActivity(idDevice);
+                }
 
             }
         }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -216,17 +231,34 @@ public class ReaderActivity extends AppCompatActivity implements ZXingScannerVie
         dialog.show();
     }
 
-    public void goToDeviceActivity(String idDevice){
+    public void goToDeviceActivity(String idDevice) {
         Intent gotoDeviceActivity = new Intent(ReaderActivity.this, DeviceActivity.class);
         gotoDeviceActivity.putExtra("idDevice", idDevice);
         startActivity(gotoDeviceActivity);
     }
 
-    public void saveToDatabase(String idDevice, String deviceName){
+    public void saveToDatabase(String idDevice, String deviceName) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference dataDevice = FirebaseDatabase.getInstance().getReference().child("User");
-        Device newDevice = new Device(deviceName,false);
+        Device newDevice = new Device(deviceName, false);
         dataDevice.child(firebaseUser.getUid()).child(idDevice).setValue(newDevice);
+    }
+
+    private void readAllId() {
+        DatabaseReference dataDevice = FirebaseDatabase.getInstance().getReference();
+        dataDevice.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    listIdDevidce.add(data.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

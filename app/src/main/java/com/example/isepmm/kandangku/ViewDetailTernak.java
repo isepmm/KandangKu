@@ -119,19 +119,6 @@ public class ViewDetailTernak extends AppCompatActivity {
         });
         setTitle("Detail Ternak");
     }
-    private void ReadLaskey() {
-        mDatabaseReference.child(idDevice).child("LastKey").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                lastKey = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     private String unixTimestimeToString(long unixTimestime) {
         Date date = new Date(unixTimestime * 1000L);
@@ -147,6 +134,8 @@ public class ViewDetailTernak extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         periodeTernak.removeValue();
                         Toast.makeText(ViewDetailTernak.this, R.string.click_delete, Toast.LENGTH_SHORT).show();
+                        /*Intent hapus = new Intent(ViewDetailTernak.this, MainActivity.class);
+                        startActivity(hapus);*/
                         finish();
                     }
                 })

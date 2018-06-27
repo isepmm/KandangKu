@@ -24,9 +24,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="device_name">Device Name</string>
+    <string name="device_name">Nama Kandang</string>
     <string name="simpan">Simpan</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Batal</string>
     <string name="ayam_mati">Ayam Mati</string>
     <string name="mati">Edit Ayam Mati</string>
 

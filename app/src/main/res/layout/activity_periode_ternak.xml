@@ -29,10 +29,9 @@
         android:drawablePadding="8dp"
         android:textStyle="bold"
         android:textColor="#494949"
-        android:text="Mari Kita Berternak"
+        android:text="Mari Kita Berternak!"
         android:textSize="16sp"
         android:layout_centerInParent="true"
-        android:visibility="gone"
         android:gravity="center"/>
 
     <android.support.design.widget.FloatingActionButton

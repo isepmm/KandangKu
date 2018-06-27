@@ -24,8 +24,6 @@ import static com.example.isepmm.kandangku.R.id.tanggal_datang;
 public class DeviceAdapter extends ArrayAdapter<Device> {
     private TextView device_id;
     private TextView device_name;
-    private TextView status;
-
 
     public DeviceAdapter(@NonNull Context context, @NonNull ArrayList<Device> objects) {
         super(context, 0, objects);
@@ -40,19 +38,12 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
         }
         device_id = (TextView) convertView.findViewById(R.id.id_device);
         device_name = (TextView) convertView.findViewById(R.id.nama_device);
-        status = (TextView) convertView.findViewById(R.id.status);
 
         Device device = getItem(position);
 
         device_id.setText(device.getDeviceId());
         device_name.setText(device.getDeviceName());
-        if(device.isStatus()){
-            status.setText("Berjalan");
-            status.setBackgroundResource(R.color.colorPrimary);
-        }else{
-            status.setText("Berhenti");
-            status.setBackgroundResource(R.color.Tamiya);
-        }
+
 
         return convertView;
     }

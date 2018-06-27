@@ -20,4 +20,9 @@
         android:id="@+id/action_keluar"
         android:title="Keluar"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_tambah_device"
+        android:title="Tambah Device"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_pin_24dp"/>
 </menu>
