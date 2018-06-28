@@ -27,9 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
-        android:textStyle="bold"
-        android:textColor="#494949"
-        android:text="Mari Kita Berternak!"
+        android:text="Data kosong, \n tambahkan data "
         android:textSize="16sp"
         android:layout_centerInParent="true"
         android:gravity="center"/>

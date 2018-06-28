@@ -266,6 +266,7 @@ public class FragmentGrafik extends android.support.v4.app.Fragment implements O
         mChart.animateX(2500);
         Legend l = mChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
+        mChart.setNoDataText("Data Kosong");
     }
 
     private String simpleDateFormat() {
